@@ -1,0 +1,2496 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  >
+  <link rel="icon" type="image/svg+xml" href="../favicon.webp" />
+  <title>Detailed Evaluation Report | UniVisory EDGE</title>
+
+  <style>
+    :root {
+      --navy: #101f3b;
+      --blue: #1b4eac;
+      --blue-light: #edf5ff;
+      --ink: #18243b;
+      --muted: #64748b;
+      --line: #e0e6f0;
+      --page: #f4f7fb;
+      --white: #ffffff;
+      --green: #9a6700;
+      --green-bg: #eaf7ee;
+      --amber: #9a6700;
+      --amber-bg: #fff8e1;
+      --red: #b42318;
+      --red-bg: #fff0ef;
+      --purple: #6941c6;
+      --purple-bg: #f4f0ff;
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+    }
+
+    .topbar {
+      background: var(--navy);
+      color: white;
+      padding: 20px max(5%, calc((100% - 1180px) / 2));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.07em;
+    }
+
+    .brand span {
+      font-weight: 400;
+    }
+
+    .topbar small {
+      opacity: 0.75;
+      letter-spacing: 0.08em;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 32px));
+      margin: 34px auto 70px;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    button,
+    a.button {
+      border: 0;
+      border-radius: 9px;
+      padding: 11px 15px;
+      background: var(--blue);
+      color: white;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+    }
+
+    button:hover,
+    a.button:hover {
+      filter: brightness(1.08);
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .button.secondary {
+      background: #e9eff8;
+      color: #19365e;
+    }
+
+    .button.success {
+      background: var(--green);
+      color: #fff;
+    }
+
+    .error,
+    .success {
+      margin: 10px 0;
+      font-weight: 700;
+    }
+
+    .error {
+      color: var(--red);
+    }
+
+    .success {
+      color: var(--green);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .hero {
+      background:
+        linear-gradient(135deg, #102346, #1b4eac);
+      color: white;
+      border-radius: 22px;
+      padding: 34px;
+      margin-bottom: 22px;
+      box-shadow: 0 15px 35px #13244320;
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 800;
+      opacity: 0.75;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin-top: 0;
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 5vw, 48px);
+      line-height: 1.08;
+      margin: 10px 0;
+    }
+
+    .hero p {
+      margin: 0;
+      color: #d8e6ff;
+      line-height: 1.6;
+      max-width: 760px;
+    }
+
+    .hero-id {
+      text-align: right;
+      font-size: 12px;
+      color: #d8e6ff;
+      word-break: break-all;
+      max-width: 250px;
+    }
+
+    .panel {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 25px;
+      margin: 22px 0;
+      box-shadow: 0 8px 25px #1324430b;
+    }
+
+    .panel-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .panel-heading p {
+      margin: 5px 0 0;
+      color: var(--muted);
+    }
+
+    .metadata-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .metadata-item {
+      background: #f8faff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 15px;
+      min-width: 0;
+    }
+
+    .metadata-label {
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+
+    .metadata-value {
+      font-weight: 750;
+      word-break: break-word;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .badge.blue {
+      color: #174ea6;
+      background: #dceaff;
+    }
+
+    .badge.green {
+      color: var(--green);
+      background: var(--green-bg);
+    }
+
+    .badge.amber {
+      color: var(--amber);
+      background: var(--amber-bg);
+    }
+
+    .badge.red {
+      color: var(--red);
+      background: var(--red-bg);
+    }
+
+    .badge.purple {
+      color: var(--purple);
+      background: var(--purple-bg);
+    }
+
+    .score-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .score-ring {
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin: auto;
+      background:
+        conic-gradient(
+          var(--blue) var(--score-percent),
+          #e8eef8 var(--score-percent)
+        );
+      position: relative;
+    }
+
+    .score-ring::after {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border-radius: 50%;
+      background: white;
+    }
+
+    .score-value {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .score-value strong {
+      display: block;
+      font-size: 42px;
+      line-height: 1;
+    }
+
+    .score-value span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .score-summary {
+      color: var(--muted);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .criteria-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .criterion-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+      background: #fff;
+    }
+
+    .criterion-card-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .criterion-title {
+      font-size: 16px;
+      font-weight: 800;
+      text-transform: capitalize;
+    }
+
+    .criterion-score {
+      min-width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: var(--blue-light);
+      color: var(--blue);
+      font-size: 19px;
+      font-weight: 900;
+    }
+
+    .criterion-score.null {
+      background: var(--amber-bg);
+      color: var(--amber);
+      font-size: 12px;
+      text-align: center;
+      padding: 4px;
+    }
+
+    .criterion-reason,
+    .criterion-uncertainty {
+      color: #4f5f78;
+      line-height: 1.6;
+      margin: 8px 0 0;
+    }
+
+    .criterion-uncertainty {
+      background: #fff8e1;
+      border-left: 3px solid #d99b00;
+      border-radius: 5px;
+      padding: 9px 11px;
+      font-size: 13px;
+    }
+
+    .criterion-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 15px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .progress {
+      height: 8px;
+      background: #e8eef8;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      border-radius: inherit;
+      background: var(--blue);
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .list-item {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 15px;
+      background: #fbfcff;
+      line-height: 1.6;
+    }
+
+    .list-item strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .numbered-list {
+      counter-reset: actions;
+      display: grid;
+      gap: 13px;
+    }
+
+    .numbered-item {
+      counter-increment: actions;
+      position: relative;
+      padding: 16px 16px 16px 53px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      line-height: 1.6;
+      background: #fbfcff;
+    }
+
+    .numbered-item::before {
+      content: counter(actions);
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--blue);
+      color: white;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .gate-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .gate-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 15px;
+      background: #fbfcff;
+    }
+
+    .gate-name {
+      font-weight: 800;
+      text-transform: capitalize;
+      margin-bottom: 10px;
+    }
+
+    .fit-box {
+      border-radius: 14px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      background: #fbfcff;
+      line-height: 1.65;
+    }
+
+    .fit-box.status-unknown {
+      border-left: 5px solid var(--amber);
+    }
+
+    .fit-box.status-yes {
+      border-left: 5px solid var(--green);
+    }
+
+    .fit-box.status-no {
+      border-left: 5px solid var(--red);
+    }
+
+    .warning {
+      background: var(--amber-bg);
+      border-left: 5px solid #d99b00;
+      border-radius: 9px;
+      padding: 15px;
+      line-height: 1.6;
+      margin: 10px 0;
+    }
+
+    .danger {
+      background: var(--red-bg);
+      border-left: 5px solid var(--red);
+      border-radius: 9px;
+      padding: 15px;
+      line-height: 1.6;
+      margin: 10px 0;
+    }
+
+    .source-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 15px;
+      background: #fff;
+    }
+
+    .source-title {
+      font-weight: 800;
+      line-height: 1.45;
+      margin-bottom: 8px;
+    }
+
+    .source-meta {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .source-card a {
+      color: var(--blue);
+      overflow-wrap: anywhere;
+    }
+
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .submission-field {
+      margin: 14px 0;
+    }
+
+    .submission-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 7px;
+    }
+
+    .submission-content {
+      white-space: pre-wrap;
+      line-height: 1.65;
+      background: #f8faff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 15px;
+      overflow-wrap: anywhere;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.6;
+      margin-top: 35px;
+    }
+
+    .empty {
+      padding: 20px;
+      border: 1px dashed #b7c4d8;
+      border-radius: 12px;
+      color: var(--muted);
+      background: #fbfcff;
+    }
+
+    @media (max-width: 900px) {
+      .metadata-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .score-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .two-column,
+      .source-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gate-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      main {
+        width: min(100% - 22px, 1180px);
+        margin-top: 18px;
+      }
+
+      .topbar {
+        padding: 18px;
+      }
+
+      .topbar small {
+        display: none;
+      }
+
+      .hero {
+        padding: 24px;
+        border-radius: 16px;
+      }
+
+      .hero-top {
+        display: block;
+      }
+
+      .hero-id {
+        text-align: left;
+        margin-top: 18px;
+      }
+
+      .panel {
+        padding: 18px;
+        border-radius: 14px;
+      }
+
+      .metadata-grid,
+      .criteria-grid,
+      .gate-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .panel-heading {
+        display: block;
+      }
+
+      .score-ring {
+        width: 165px;
+        height: 165px;
+      }
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 14mm;
+      }
+
+      body {
+        background: white;
+      }
+
+      .topbar,
+      .toolbar,
+      #error,
+      #success,
+      .no-print {
+        display: none !important;
+      }
+
+      main {
+        width: 100%;
+        margin: 0;
+      }
+
+      .hero,
+      .panel {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+
+      .hero {
+        color: var(--ink);
+        background: white;
+        border: 2px solid var(--navy);
+      }
+
+      .hero p,
+      .hero-id {
+        color: var(--muted);
+      }
+
+      .panel {
+        border: 1px solid #cbd5e1;
+      }
+
+      .criterion-card,
+      .list-item,
+      .numbered-item,
+      .gate-card,
+      .source-card {
+        break-inside: avoid;
+      }
+
+      a {
+        color: var(--ink);
+        text-decoration: none;
+      }
+
+      .footer-note {
+        display: block;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">
+      UNIVISORY <span>/ EDGE</span>
+    </div>
+    <small>MENTOR REPORT INTELLIGENCE</small>
+  </header>
+
+  <main>
+    <div class="toolbar">
+      <a
+        class="button secondary"
+        href="/mentor/reports"
+      >
+        ← Back to reports
+      </a>
+
+      <button id="download">
+        Download formatted report
+      </button>
+
+      <button id="print">
+        Print / Save as PDF
+      </button>
+
+      <button
+        id="release"
+        class="button success"
+      >
+        Mark as released
+      </button>
+    </div>
+
+    <p id="error" class="error"></p>
+    <p id="success" class="success"></p>
+
+    <div id="reportRoot">
+      <div class="empty">
+        Loading detailed report...
+      </div>
+    </div>
+
+    <p class="footer-note">
+      UniVisory EDGE · Advisory assessment only ·
+      This report is not an official competition result or win probability.
+    </p>
+  </main>
+
+  <script>
+    const params =
+      new URLSearchParams(location.search);
+
+    const reportId = params.get("id");
+
+    const reportRoot =
+      document.getElementById("reportRoot");
+
+    const errorBox =
+      document.getElementById("error");
+
+    const successBox =
+      document.getElementById("success");
+
+    const downloadButton =
+      document.getElementById("download");
+
+    const printButton =
+      document.getElementById("print");
+
+    const releaseButton =
+      document.getElementById("release");
+
+    let report = null;
+
+    function text(value, fallback = "") {
+      if (
+        value === null ||
+        value === undefined ||
+        value === ""
+      ) {
+        return fallback;
+      }
+
+      return String(value);
+    }
+
+    function escapeHtml(value) {
+      return text(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function titleCase(value) {
+      return text(value)
+        .replaceAll("_", " ")
+        .replace(/\b\w/g, (letter) =>
+          letter.toUpperCase()
+        );
+    }
+
+    function formatDate(value) {
+      if (!value) {
+        return "Not available";
+      }
+
+      const date = new Date(value);
+
+      if (Number.isNaN(date.getTime())) {
+        return text(value);
+      }
+
+      return date.toLocaleString();
+    }
+
+    function scoreValue(value) {
+      if (
+        value === null ||
+        value === undefined ||
+        value === ""
+      ) {
+        return null;
+      }
+
+      const numeric = Number(value);
+
+      if (!Number.isFinite(numeric)) {
+        return null;
+      }
+
+      return Math.max(0, Math.min(5, numeric));
+    }
+
+    function scorePercent(value) {
+      const numeric = Number(value);
+
+      if (!Number.isFinite(numeric)) {
+        return 0;
+      }
+
+      return Math.max(
+        0,
+        Math.min(100, (numeric / 5) * 100)
+      );
+    }
+
+    function statusClass(value) {
+      const normalized =
+        text(value).toLowerCase();
+
+      if (
+        normalized.includes("released") ||
+        normalized === "yes" ||
+        normalized === "pass"
+      ) {
+        return "green";
+      }
+
+      if (
+        normalized === "no" ||
+        normalized === "fail"
+      ) {
+        return "red";
+      }
+
+      if (
+        normalized === "unknown" ||
+        normalized.includes("conditional") ||
+        normalized.includes("review")
+      ) {
+        return "amber";
+      }
+
+      return "blue";
+    }
+
+    function statusBadge(value) {
+      const cls = statusClass(value);
+
+      return `
+        <span class="badge ${cls}">
+          ${escapeHtml(titleCase(value))}
+        </span>
+      `;
+    }
+
+    function metadataItem(label, value) {
+      return `
+        <div class="metadata-item">
+          <div class="metadata-label">
+            ${escapeHtml(label)}
+          </div>
+          <div class="metadata-value">
+            ${escapeHtml(value || "Not provided")}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderHero(report, full) {
+      const status =
+        report.status || "under_mentor_review";
+
+      const decision =
+        full.decision || "Not available";
+
+      return `
+        <section class="hero">
+          <div class="hero-top">
+            <div>
+              <div class="eyebrow">
+                EDGE Detailed Evaluation
+              </div>
+
+              <h1>
+                ${escapeHtml(
+                  report.student_name ||
+                    "Student evaluation"
+                )}
+              </h1>
+
+              <p>
+                A structured mentor review for
+                <strong>
+                  ${escapeHtml(
+                    report.competition ||
+                      "Selected opportunity"
+                  )}
+                </strong>
+                at the
+                <strong>
+                  ${escapeHtml(
+                    titleCase(
+                      report.stage ||
+                        "selected stage"
+                    )
+                  )}
+                </strong>.
+              </p>
+            </div>
+
+            <div class="hero-id">
+              <div>
+                Report status:
+                ${statusBadge(status)}
+              </div>
+
+              <div style="margin-top: 12px">
+                Report ID:
+                ${escapeHtml(report.id)}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Student and project overview</h2>
+              <p>
+                Key identifying and assessment context.
+              </p>
+            </div>
+
+            ${statusBadge(decision)}
+          </div>
+
+          <div class="metadata-grid">
+            ${metadataItem(
+              "Student",
+              report.student_name
+            )}
+
+            ${metadataItem(
+              "Parent / guardian",
+              report.parent_name
+            )}
+
+            ${metadataItem(
+              "Parent email",
+              report.parent_email
+            )}
+
+            ${metadataItem(
+              "Parent phone",
+              report.parent_phone
+            )}
+
+            ${metadataItem(
+              "Competition",
+              report.competition
+            )}
+
+            ${metadataItem(
+              "Stage",
+              titleCase(report.stage)
+            )}
+
+            ${metadataItem(
+              "Grade",
+              report.grade
+            )}
+
+            ${metadataItem(
+              "Country",
+              report.country
+            )}
+
+            ${metadataItem(
+              "Created",
+              formatDate(report.created_at)
+            )}
+
+            ${metadataItem(
+              "Last updated",
+              formatDate(report.updated_at)
+            )}
+
+            ${metadataItem(
+              "Engine version",
+              full.engine_version
+            )}
+
+            ${metadataItem(
+              "Knowledge base",
+              full.knowledge_base_version
+            )}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderScore(full) {
+      const score =
+        Number(full.provisional_score_out_of_100);
+
+      const validScore =
+        Number.isFinite(score)
+          ? Math.max(0, Math.min(100, score))
+          : null;
+
+      const scoreText =
+        validScore === null
+          ? "N/A"
+          : validScore.toFixed(1);
+
+      const scorePercentValue =
+        validScore === null
+          ? 0
+          : validScore;
+
+      return `
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>EDGE readiness overview</h2>
+              <p>
+                Internal advisory assessment aligned to the selected opportunity.
+              </p>
+            </div>
+
+            <span class="badge purple">
+              ${escapeHtml(
+                text(
+                  full.assessed_weight_percent,
+                  "0"
+                )
+              )}% assessed
+            </span>
+          </div>
+
+          <div class="score-layout">
+            <div
+              class="score-ring"
+              style="--score-percent: ${scorePercentValue}%"
+            >
+              <div class="score-value">
+                <strong>${scoreText}</strong>
+                <span>out of 100</span>
+              </div>
+            </div>
+
+            <div>
+              <h3>
+                ${escapeHtml(
+                  full.score_disclaimer ||
+                    "Advisory readiness score."
+                )}
+              </h3>
+
+              <p class="score-summary">
+                ${escapeHtml(
+                  full.source_basis ||
+                    "The report uses the configured competition knowledge base and submitted evidence."
+                )}
+              </p>
+
+              ${
+                full.official_weights === true
+                  ? `
+                    <p class="score-summary">
+                      Official competition weights are available for this assessment.
+                    </p>
+                  `
+                  : `
+                    <p class="score-summary">
+                      Official percentage weights were not available or were not treated as verified. Internal analytical weights are clearly separated from official judging rules.
+                    </p>
+                  `
+              }
+
+              <div class="fit-box status-${escapeHtml(
+                text(
+                  full.competition_fit?.status,
+                  "unknown"
+                ).toLowerCase()
+              )}">
+                <strong>Competition fit</strong>
+                <p>
+                  ${escapeHtml(
+                    full.competition_fit?.reason ||
+                      "Competition fit remains unverified."
+                  )}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderCriteria(full) {
+      const criteria =
+        full.criteria || {};
+
+      const entries =
+        Object.entries(criteria);
+
+      if (!entries.length) {
+        return `
+          <section class="panel">
+            <h2>Strength by criterion</h2>
+            <div class="empty">
+              No criterion data is available.
+            </div>
+          </section>
+        `;
+      }
+
+      const cards = entries.map(
+        ([name, item]) => {
+          const score =
+            scoreValue(item?.score);
+
+          const scoreLabel =
+            score === null
+              ? "Not assessable"
+              : `${score}/5`;
+
+          const width =
+            score === null
+              ? 0
+              : scorePercent(score);
+
+          const evidenceIds =
+            Array.isArray(
+              item?.evidence_ids
+            )
+              ? item.evidence_ids.join(", ")
+              : "Not specified";
+
+          return `
+            <article class="criterion-card">
+              <div class="criterion-card-header">
+                <div>
+                  <div class="criterion-title">
+                    ${escapeHtml(
+                      titleCase(name)
+                    )}
+                  </div>
+
+                  <div class="progress">
+                    <div
+                      class="progress-bar"
+                      style="width: ${width}%"
+                    ></div>
+                  </div>
+                </div>
+
+                <div
+                  class="criterion-score ${
+                    score === null
+                      ? "null"
+                      : ""
+                  }"
+                >
+                  ${escapeHtml(scoreLabel)}
+                </div>
+              </div>
+
+              <p class="criterion-reason">
+                ${escapeHtml(
+                  item?.reason ||
+                    "No criterion explanation provided."
+                )}
+              </p>
+
+              ${
+                item?.uncertainty
+                  ? `
+                    <p class="criterion-uncertainty">
+                      <strong>Uncertainty:</strong>
+                      ${escapeHtml(
+                        item.uncertainty
+                      )}
+                    </p>
+                  `
+                  : ""
+              }
+
+              <div class="criterion-footer">
+                <span>
+                  Weight:
+                  ${escapeHtml(
+                    text(item?.weight, "Not specified")
+                  )}%
+                </span>
+              </div>
+            </article>
+          `;
+        }
+      );
+
+      return `
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Strength by criterion</h2>
+              <p>
+                Each criterion is shown with its score, weight, reasoning and evidence basis.
+              </p>
+            </div>
+          </div>
+
+          <div class="criteria-grid">
+            ${cards.join("")}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderGates(full) {
+      const gates =
+        full.gates || {};
+
+      const entries =
+        Object.entries(gates);
+
+      if (!entries.length) {
+        return "";
+      }
+
+      return `
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Readiness gates</h2>
+              <p>
+                Gates are separate from criterion scoring and may stop a project from being ready.
+              </p>
+            </div>
+          </div>
+
+          <div class="gate-grid">
+            ${entries.map(
+              ([name, value]) => `
+                <div class="gate-card">
+                  <div class="gate-name">
+                    ${escapeHtml(
+                      titleCase(name)
+                    )}
+                  </div>
+                  ${statusBadge(value)}
+                </div>
+              `
+            ).join("")}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderListSection(
+      title,
+      subtitle,
+      values,
+      itemClass = "list-item"
+    ) {
+      if (!Array.isArray(values) || !values.length) {
+        return `
+          <section class="panel">
+            <div class="panel-heading">
+              <div>
+                <h2>${escapeHtml(title)}</h2>
+                <p>${escapeHtml(subtitle)}</p>
+              </div>
+            </div>
+
+            <div class="empty">
+              No items were recorded.
+            </div>
+          </section>
+        `;
+      }
+
+      return `
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>${escapeHtml(title)}</h2>
+              <p>${escapeHtml(subtitle)}</p>
+            </div>
+          </div>
+
+          <div class="list">
+            ${values.map(
+              (value) => {
+                if (
+                  typeof value === "string"
+                ) {
+                  return `
+                    <div class="${itemClass}">
+                      ${escapeHtml(value)}
+                    </div>
+                  `;
+                }
+
+                const action =
+                  value?.action ||
+                  value?.topic ||
+                  value?.title ||
+                  "Action";
+
+                const details =
+                  value?.details ||
+                  value?.details_text ||
+                  value?.description ||
+                  "";
+
+                return `
+                  <div class="${itemClass}">
+                    <strong>
+                      ${escapeHtml(action)}
+                    </strong>
+                    ${escapeHtml(details)}
+                  </div>
+                `;
+              }
+            ).join("")}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderWarnings(full) {
+      const warnings =
+        full.warnings || [];
+
+      if (!Array.isArray(warnings) || !warnings.length) {
+        return "";
+      }
+
+      return `
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Important cautions</h2>
+              <p>
+                These limitations should be resolved before external claims are made.
+              </p>
+            </div>
+          </div>
+
+          ${warnings.map(
+            (warning) => `
+              <div class="warning">
+                ${escapeHtml(warning)}
+              </div>
+            `
+          ).join("")}
+        </section>
+      `;
+    }
+
+    function renderWeaknesses(full) {
+      const values =
+        full.critical_weaknesses || [];
+
+      if (!Array.isArray(values) || !values.length) {
+        return `
+          <section class="panel">
+            <h2>Critical weaknesses</h2>
+            <div class="empty">
+              No critical weaknesses were recorded.
+            </div>
+          </section>
+        `;
+      }
+
+      return `
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Critical weaknesses</h2>
+              <p>
+                Highest-priority issues limiting confidence in the current work.
+              </p>
+            </div>
+          </div>
+
+          ${values.map(
+            (value) => `
+              <div class="danger">
+                ${escapeHtml(value)}
+              </div>
+            `
+          ).join("")}
+        </section>
+      `;
+    }
+
+    // function renderNextActions(full) {
+    //   const values =
+    //     full.next_actions || [];
+
+    //   if (!Array.isArray(values) || !values.length) {
+    //     return `
+    //       <section class="panel">
+    //         <h2>Next actions</h2>
+    //         <div class="empty">
+    //           No next actions were recorded.
+    //         </div>
+    //       </section>
+    //     `;
+    //   }
+
+    //   return `
+    //     <section class="panel">
+    //       <div class="panel-heading">
+    //         <div>
+    //           <h2>Recommended next actions</h2>
+    //           <p>
+    //             Practical steps to improve evidence quality and competition readiness.
+    //           </p>
+    //         </div>
+    //       </div>
+
+    //       <div class="numbered-list">
+    //         ${values.map(
+    //           (value) => `
+    //             <div class="numbered-item">
+    //               <strong>
+    //                 ${escapeHtml(
+    //                   value?.action ||
+    //                     "Recommended action"
+    //                 )}
+    //               </strong>
+
+    //               <div>
+    //                 ${escapeHtml(
+    //                   value?.details ||
+    //                     "No additional details provided."
+    //                 )}
+    //               </div>
+    //             </div>
+    //           `
+    //         ).join("")}
+    //       </div>
+    //     </section>
+    //   `;
+    // }
+
+    function renderNextActions(full) {
+        const rawValues =
+            Array.isArray(full.next_actions)
+            ? full.next_actions
+            : [];
+
+        const actions = rawValues
+            .map((value) => {
+            if (typeof value === "string") {
+                const details = value.trim();
+
+                return details
+                ? {
+                    action: "",
+                    details
+                    }
+                : null;
+            }
+
+            if (!value || typeof value !== "object") {
+                return null;
+            }
+
+            const action = [
+                value.action,
+                value.title,
+                value.topic,
+                value.name
+            ]
+                .find(
+                (item) =>
+                    typeof item === "string" &&
+                    item.trim()
+                );
+
+            const details = [
+                value.details,
+                value.details_text,
+                value.description,
+                value.explanation,
+                value.recommendation
+            ]
+                .find(
+                (item) =>
+                    typeof item === "string" &&
+                    item.trim()
+                );
+
+            const cleanAction =
+                typeof action === "string"
+                ? action.trim()
+                : "";
+
+            const cleanDetails =
+                typeof details === "string"
+                ? details.trim()
+                : "";
+
+            if (!cleanAction && !cleanDetails) {
+                return null;
+            }
+
+            return {
+                action: cleanAction,
+                details: cleanDetails
+            };
+            })
+            .filter(Boolean)
+            .filter(
+            (item) =>
+                item.action ||
+                item.details
+            );
+
+        if (!actions.length) {
+            return "";
+        }
+
+        return `
+            <section class="panel">
+            <div class="panel-heading">
+                <div>
+                <h2>Recommended next actions</h2>
+                <p>
+                    Practical steps to improve evidence quality and competition readiness.
+                </p>
+                </div>
+            </div>
+
+            <div class="numbered-list">
+                ${actions
+                .map(
+                    (item) => `
+                    <div class="numbered-item">
+                        ${
+                        item.action
+                            ? `
+                            <strong>
+                                ${escapeHtml(item.action)}
+                            </strong>
+                            `
+                            : ""
+                        }
+
+                        ${
+                        item.details
+                            ? `
+                            <div>
+                                ${escapeHtml(item.details)}
+                            </div>
+                            `
+                            : ""
+                        }
+                    </div>
+                    `
+                )
+                .join("")}
+            </div>
+            </section>
+        `;
+        }
+
+    function renderQuestions(full) {
+      const values =
+        full.questions_for_student || [];
+
+      if (!Array.isArray(values) || !values.length) {
+        return "";
+      }
+
+      return `
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Questions for student discussion</h2>
+              <p>
+                Questions that help the student defend, clarify and improve the work.
+              </p>
+            </div>
+          </div>
+
+          <div class="numbered-list">
+            ${values.map(
+              (value) => `
+                <div class="numbered-item">
+                  ${escapeHtml(value)}
+                </div>
+              `
+            ).join("")}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderNovelty(full) {
+      const verdict =
+        full.novelty_verdict ||
+        "UNVERIFIED";
+
+      const feedback =
+        full.submission_specific_feedback ||
+        [];
+
+      const noveltyItems =
+        Array.isArray(feedback)
+          ? feedback.filter(
+              (item) =>
+                item &&
+                (
+                  text(item.topic)
+                    .toLowerCase()
+                    .includes("novelty") ||
+                  text(item.topic)
+                    .toLowerCase()
+                    .includes("prior-art") ||
+                  text(item.topic)
+                    .toLowerCase()
+                    .includes("difference")
+                )
+            )
+          : [];
+
+      return `
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Novelty and prior-art review</h2>
+              <p>
+                Discovery leads are not treated as proof of novelty.
+              </p>
+            </div>
+
+          </div>
+
+          <div class="fit-box status-unknown">
+            <strong>Novelty verdict</strong>
+
+            ${
+              full.literature_discovery?.novelty_policy
+                ? `
+                  <p>
+                    ${escapeHtml(
+                      full.literature_discovery
+                        .novelty_policy
+                    )}
+                  </p>
+                `
+                : ""
+            }
+          </div>
+
+          ${
+            noveltyItems.length
+              ? `
+                <div class="list" style="margin-top: 15px">
+                  ${noveltyItems.map(
+                    (item) => `
+                      <div class="list-item">
+                        <strong>
+                          ${escapeHtml(
+                            item.topic
+                          )}
+                        </strong>
+                        ${escapeHtml(
+                          item.details
+                        )}
+                      </div>
+                    `
+                  ).join("")}
+                </div>
+              `
+              : ""
+          }
+        </section>
+      `;
+    }
+
+    function renderSources(full) {
+      const registry =
+        full.evidence_registry || {};
+
+      const entries =
+        Object.entries(registry);
+
+      if (!entries.length) {
+        return "";
+      }
+
+      return `
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Evidence and source registry</h2>
+              <p>
+                Sources and evidence identifiers referenced by the assessment.
+              </p>
+            </div>
+          </div>
+
+          <div class="source-grid">
+            ${entries.map(
+              ([id, source]) => `
+                <article class="source-card">
+                  <div class="source-title">
+                    ${escapeHtml(id)} ·
+                    ${escapeHtml(
+                      source.title ||
+                        source.label ||
+                        source.type ||
+                        "Evidence item"
+                    )}
+                  </div>
+
+                  <div class="source-meta">
+                    Type:
+                    ${escapeHtml(
+                      source.type ||
+                        "Not specified"
+                    )}
+                    <br>
+                  </div>
+
+                  ${
+                    source.url
+                      ? `
+                        <p>
+                          <a
+                            href="${escapeHtml(
+                              source.url
+                            )}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Open source
+                          </a>
+                        </p>
+                      `
+                      : ""
+                  }
+
+                  ${
+                    source.doi
+                      ? `
+                        <div class="source-meta">
+                          DOI:
+                          ${escapeHtml(
+                            source.doi
+                          )}
+                        </div>
+                      `
+                      : ""
+                  }
+                </article>
+              `
+            ).join("")}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderLiterature(full) {
+      const works =
+        full.literature_discovery?.works ||
+        [];
+
+      if (!Array.isArray(works) || !works.length) {
+        return "";
+      }
+
+      return `
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Literature discovery leads</h2>
+              <p>
+                These are review leads, not independently verified novelty evidence.
+              </p>
+            </div>
+
+            <span class="badge amber">
+              Discovery only
+            </span>
+          </div>
+
+          <div class="source-grid">
+            ${works.map(
+              (work, index) => `
+                <article class="source-card">
+                  <div class="source-title">
+                    LEAD-${index + 1} ·
+                    ${escapeHtml(
+                      work.title ||
+                        "Untitled source"
+                    )}
+                  </div>
+
+                  <div class="source-meta">
+                    Year:
+                    ${escapeHtml(
+                      text(
+                        work.year,
+                        "Unknown"
+                      )
+                    )}
+                    <br>
+                    Similarity:
+                    ${escapeHtml(
+                      work.similarity == null
+                        ? "Not available"
+                        : work.similarity
+                    )}
+                    <br>
+                    Review status:
+                    ${escapeHtml(
+                      work.review_status ||
+                        "Not specified"
+                    )}
+                  </div>
+
+                  ${
+                    work.url
+                      ? `
+                        <p>
+                          <a
+                            href="${escapeHtml(
+                              work.url
+                            )}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Review source
+                          </a>
+                        </p>
+                      `
+                      : ""
+                  }
+                </article>
+              `
+            ).join("")}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderSubmission(full, report) {
+      const feedback =
+        full.submission_specific_feedback ||
+        [];
+
+      return `
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Submitted project record</h2>
+              <p>
+                Original information stored with this evaluation.
+              </p>
+            </div>
+          </div>
+
+          <div class="submission-field">
+            <div class="submission-label">
+              Project content
+            </div>
+
+            <div class="submission-content">
+              ${escapeHtml(
+                report.content ||
+                  "No project content provided."
+              )}
+            </div>
+          </div>
+
+          <div class="submission-field">
+            <div class="submission-label">
+              Evidence / references
+            </div>
+
+            <div class="submission-content">
+              ${escapeHtml(
+                report.evidence ||
+                  "No evidence or references provided."
+              )}
+            </div>
+          </div>
+
+          <div class="submission-field">
+            <div class="submission-label">
+              Resources and timeline
+            </div>
+
+            <div class="submission-content">
+              ${escapeHtml(
+                report.constraints ||
+                  "No resources or timeline provided."
+              )}
+            </div>
+          </div>
+
+          ${
+            feedback.length
+              ? `
+                <div class="submission-field">
+                  <div class="submission-label">
+                    Submission-specific feedback
+                  </div>
+
+                  <div class="list">
+                    ${feedback.map(
+                      (item) => `
+                        <div class="list-item">
+                          <strong>
+                            ${escapeHtml(
+                              item.topic ||
+                                "Feedback"
+                            )}
+                          </strong>
+                          ${escapeHtml(
+                            item.details ||
+                              ""
+                          )}
+                        </div>
+                      `
+                    ).join("")}
+                  </div>
+                </div>
+              `
+              : ""
+          }
+        </section>
+      `;
+    }
+
+    function renderReport(report) {
+      const full =
+        report.full_report || {};
+
+      reportRoot.innerHTML = [
+        renderHero(report, full),
+        renderScore(full),
+        renderCriteria(full),
+        // renderGates(full),
+        renderWarnings(full),
+        renderWeaknesses(full),
+        renderNextActions(full),
+        renderQuestions(full),
+        renderNovelty(full),
+        renderSources(full),
+        renderLiterature(full),
+        // renderSubmission(full, report)
+      ].join("");
+    }
+
+    function createDownloadDocument() {
+      const clonedRoot =
+        document
+          .getElementById("reportRoot")
+          .cloneNode(true);
+
+      const title =
+        `${report.student_name || "Student"} - UniVisory EDGE Report`;
+
+      return `
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>${escapeHtml(title)}</title>
+  <style>
+    ${document.querySelector("style").textContent}
+
+    body {
+      background: white;
+    }
+
+    .topbar,
+    .toolbar,
+    #error,
+    #success,
+    .footer-note {
+      display: none !important;
+    }
+
+    main {
+      width: 100%;
+      margin: 0;
+    }
+
+    .hero {
+      color: var(--ink);
+      background: white;
+      border: 2px solid var(--navy);
+      box-shadow: none;
+    }
+
+    .hero p,
+    .hero-id {
+      color: var(--muted);
+    }
+
+    .panel {
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    ${clonedRoot.outerHTML}
+  </main>
+</body>
+</html>
+      `;
+    }
+
+    async function loadReport() {
+      errorBox.textContent = "";
+      successBox.textContent = "";
+
+      if (!reportId) {
+        reportRoot.innerHTML = `
+          <div class="empty">
+            Missing report ID.
+          </div>
+        `;
+
+        errorBox.textContent =
+          "The report ID is missing from the URL.";
+
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          "/api/mentor/reports/" +
+            encodeURIComponent(reportId),
+          {
+            cache: "no-store"
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(
+            "Unable to load the selected report."
+          );
+        }
+
+        report = await response.json();
+
+        renderReport(report);
+
+        downloadButton.disabled = false;
+        printButton.disabled = false;
+        releaseButton.disabled = false;
+      } catch (error) {
+        reportRoot.innerHTML = `
+          <div class="empty">
+            Report could not be loaded.
+          </div>
+        `;
+
+        errorBox.textContent =
+          error.message;
+      }
+    }
+
+    downloadButton.addEventListener(
+      "click",
+      () => {
+        if (!report) {
+          return;
+        }
+
+        const html =
+          createDownloadDocument();
+
+        const blob = new Blob(
+          [html],
+          {
+            type: "text/html;charset=utf-8"
+          }
+        );
+
+        const url =
+          URL.createObjectURL(blob);
+
+        const link =
+          document.createElement("a");
+
+        link.href = url;
+        link.download =
+          "URIE-" +
+          reportId +
+          "-formatted-report.html";
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        URL.revokeObjectURL(url);
+
+        successBox.textContent =
+          "Formatted report downloaded.";
+      }
+    );
+
+    printButton.addEventListener(
+      "click",
+      () => {
+        window.print();
+      }
+    );
+
+    releaseButton.addEventListener(
+      "click",
+      async () => {
+        if (!report) {
+          return;
+        }
+
+        const confirmed =
+          window.confirm(
+            "Mark this report as released?"
+          );
+
+        if (!confirmed) {
+          return;
+        }
+
+        try {
+          const response = await fetch(
+            "/api/mentor/reports/" +
+              encodeURIComponent(reportId) +
+              "/release",
+            {
+              method: "POST"
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error(
+              "Unable to update report status."
+            );
+          }
+
+          successBox.textContent =
+            "Report marked as released.";
+
+          await loadReport();
+        } catch (error) {
+          errorBox.textContent =
+            error.message;
+        }
+      }
+    );
+
+    loadReport();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Detailed Evaluation Report</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #18243b;
+      margin: 0;
+      padding: 30px;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    button,
+    a {
+      padding: 10px 14px;
+      border-radius: 6px;
+      border: 0;
+      background: #1b4eac;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .secondary {
+      background: #e9eff8;
+      color: #19365e;
+    }
+
+    pre {
+      background: #101f3b;
+      color: white;
+      padding: 20px;
+      overflow: auto;
+      white-space: pre-wrap;
+      border-radius: 8px;
+      line-height: 1.5;
+    }
+
+    .error {
+      color: #b42318;
+    }
+
+    .success {
+      color: #137333;
+    }
+  </style>
+</head>
+
+<body>
+<main>
+  <h1>Detailed evaluation report</h1>
+
+  <div class="toolbar">
+    <a
+      class="secondary"
+      href="/mentor/reports"
+    >
+      Back to reports
+    </a>
+
+    <button id="download" disabled>
+      Download JSON
+    </button>
+
+    <button id="release" disabled>
+      Mark as released
+    </button>
+  </div>
+
+  <p id="error" class="error"></p>
+  <p id="success" class="success"></p>
+
+  <pre id="output">Loading report...</pre>
+</main>
+
+<script>
+  const params =
+    new URLSearchParams(location.search);
+
+  const id = params.get("id");
+
+  const downloadButton =
+    document.getElementById("download");
+
+  const releaseButton =
+    document.getElementById("release");
+
+  const output =
+    document.getElementById("output");
+
+  const errorBox =
+    document.getElementById("error");
+
+  const successBox =
+    document.getElementById("success");
+
+  let report = null;
+
+  async function loadReport() {
+    errorBox.textContent = "";
+    successBox.textContent = "";
+    downloadButton.disabled = true;
+    releaseButton.disabled = true;
+
+    if (!id) {
+      output.textContent = "";
+      errorBox.textContent =
+        "Missing report ID.";
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        "/api/mentor/reports/" +
+          encodeURIComponent(id),
+        {
+          cache: "no-store"
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          "Unable to load the selected report."
+        );
+      }
+
+      report = await response.json();
+
+      output.textContent =
+        JSON.stringify(
+          report,
+          null,
+          2
+        );
+
+      downloadButton.disabled = false;
+      releaseButton.disabled = false;
+    } catch (error) {
+      output.textContent = "";
+      errorBox.textContent = error.message;
+    }
+  }
+
+  downloadButton.addEventListener(
+    "click",
+    () => {
+      if (!report) {
+        return;
+      }
+
+      const blob = new Blob(
+        [
+          JSON.stringify(
+            report,
+            null,
+            2
+          )
+        ],
+        {
+          type: "application/json"
+        }
+      );
+
+      const url =
+        URL.createObjectURL(blob);
+
+      const link =
+        document.createElement("a");
+
+      link.href = url;
+      link.download =
+        "URIE-" + id + ".json";
+
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      URL.revokeObjectURL(url);
+    }
+  );
+
+  releaseButton.addEventListener(
+    "click",
+    async () => {
+      if (!report) {
+        return;
+      }
+
+      const confirmed =
+        window.confirm(
+          "Mark this report as released?"
+        );
+
+      if (!confirmed) {
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          "/api/mentor/reports/" +
+            encodeURIComponent(id) +
+            "/release",
+          {
+            method: "POST"
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(
+            "Unable to update report status."
+          );
+        }
+
+        successBox.textContent =
+          "Report marked as released.";
+
+        await loadReport();
+      } catch (error) {
+        errorBox.textContent =
+          error.message;
+      }
+    }
+  );
+
+  loadReport();
+</script>
+</body>
+</html> -->

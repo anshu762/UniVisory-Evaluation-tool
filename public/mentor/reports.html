@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+   <link rel="icon" type="image/svg+xml" href="../favicon.webp" />
+  <title>UniVisory Mentor Reports</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #18243b;
+      margin: 0;
+      padding: 30px;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    button,
+    a {
+      display: inline-block;
+      border: 0;
+      border-radius: 6px;
+      padding: 9px 12px;
+      background: #1b4eac;
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 5px 20px #13244312;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #e0e6f0;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #101f3b;
+      color: white;
+    }
+
+    .muted {
+      color: #64748b;
+    }
+
+    .error {
+      color: #b42318;
+      margin: 15px 0;
+    }
+
+    .success {
+      color: #137333;
+      margin: 15px 0;
+    }
+
+    @media (max-width: 800px) {
+      body {
+        padding: 15px;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<main>
+  <h1>Mentor evaluation reports</h1>
+
+  <div class="toolbar">
+    <button id="load">Refresh reports</button>
+  </div>
+
+  <p class="muted">
+    All stored evaluation reports are listed below.
+  </p>
+
+  <p id="error" class="error"></p>
+  <p id="success" class="success"></p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Student</th>
+        <th>Parent</th>
+        <th>Competition</th>
+        <th>Stage</th>
+        <th>Status</th>
+        <th>Created</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody id="rows"></tbody>
+  </table>
+</main>
+
+<script>
+  const loadButton = document.getElementById("load");
+  const rows = document.getElementById("rows");
+  const errorBox = document.getElementById("error");
+  const successBox = document.getElementById("success");
+
+  function cell(value) {
+    const element = document.createElement("td");
+    element.textContent =
+      value == null ? "" : String(value);
+    return element;
+  }
+
+  function formatDate(value) {
+    if (!value) {
+      return "";
+    }
+
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+      return String(value);
+    }
+
+    return date.toLocaleString();
+  }
+
+  async function loadReports() {
+    rows.replaceChildren();
+    errorBox.textContent = "";
+    successBox.textContent = "";
+
+    try {
+      const response = await fetch(
+        "/api/mentor/reports",
+        {
+          cache: "no-store"
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          "Unable to load mentor reports."
+        );
+      }
+
+      const reports = await response.json();
+
+      if (!Array.isArray(reports)) {
+        throw new Error(
+          "The server returned an invalid report list."
+        );
+      }
+
+      if (!reports.length) {
+        successBox.textContent =
+          "No evaluation reports found.";
+        return;
+      }
+
+      reports.forEach((report) => {
+        const row = document.createElement("tr");
+
+        row.appendChild(
+          cell(report.student_name)
+        );
+
+        row.appendChild(
+          cell(report.parent_name)
+        );
+
+        row.appendChild(
+          cell(report.competition)
+        );
+
+        row.appendChild(
+          cell(report.stage)
+        );
+
+        row.appendChild(
+          cell(report.status)
+        );
+
+        row.appendChild(
+          cell(formatDate(report.created_at))
+        );
+
+        const actionCell =
+          document.createElement("td");
+
+        const link =
+          document.createElement("a");
+
+        link.href =
+          "/mentor/report?id=" +
+          encodeURIComponent(report.id);
+
+        link.textContent = "Open";
+        actionCell.appendChild(link);
+        row.appendChild(actionCell);
+
+        rows.appendChild(row);
+      });
+
+      successBox.textContent =
+        reports.length +
+        " report(s) loaded.";
+    } catch (error) {
+      errorBox.textContent = error.message;
+    }
+  }
+
+  loadButton.addEventListener(
+    "click",
+    loadReports
+  );
+
+  loadReports();
+</script>
+</body>
+</html>

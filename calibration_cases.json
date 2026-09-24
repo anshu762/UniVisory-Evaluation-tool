@@ -1,0 +1,24 @@
+{
+ "Regeneron ISEF":[
+  {"cycle":2026,"level":"top_award","project":"Predicting complex material folding","source":"Society for Science 2026 Media Kit","source_url":"https://www.societyforscience.org/regeneron-isef-2026-media-kit/","evidence_patterns":["deep_technical_method","original_contribution","strong_validation"]},
+  {"cycle":2026,"level":"top_award","project":"AI-powered underwater holographic microplastics imaging robot","source":"Society for Science 2026 Media Kit","source_url":"https://www.societyforscience.org/regeneron-isef-2026-media-kit/","evidence_patterns":["working_prototype","quantified_performance","real_world_testing","large_dataset","clear_impact"]}
+ ],
+ "Blue Ocean Competition":[
+  {"cycle":2026,"level":"global_1st","project":"Storythm","source":"Blue Ocean 2026 Winners","source_url":"https://blueoceancompetition.org/2025-2026-winners/","evidence_patterns":["value_innovation","market_reframing","pitch_clarity"]},
+  {"cycle":2026,"level":"global_2nd","project":"Dermi","source":"Blue Ocean 2026 Winners","source_url":"https://blueoceancompetition.org/2025-2026-winners/","evidence_patterns":["value_innovation","feasible_solution","pitch_clarity"]},
+  {"cycle":2026,"level":"global_3rd","project":"Accumulus Regenerative Concrete","source":"Blue Ocean 2026 Winners","source_url":"https://blueoceancompetition.org/2025-2026-winners/","evidence_patterns":["value_innovation","technical_feasibility","impact_case"]}
+ ],
+ "Technovation Girls":[
+  {"cycle":2026,"level":"senior_finalist","project":"CareCompass","source":"Technovation 2026 Season Results","source_url":"https://technovationchallenge.org/results/2026-season-results/","evidence_patterns":["community_problem","working_technology","user_relevance"]},
+  {"cycle":2026,"level":"senior_finalist","project":"Cba MultiRisk","source":"Technovation 2026 Season Results","source_url":"https://technovationchallenge.org/results/2026-season-results/","evidence_patterns":["community_problem","ai_solution","hyperlocal_data","real_world_utility"]}
+ ],
+ "Global Student Prize":[
+  {"cycle":2025,"level":"winner","project":"Adarsh Kumar overall student profile","source":"Varkey Foundation Global Student Prize","source_url":"https://www.varkeyfoundation.org/global-student-prize","evidence_patterns":["academic_and_personal_context","innovation","broader_impact","resilience"]},
+  {"cycle":2024,"level":"winner","project":"AI-powered virtual medical assistant + girls in STEM advocacy","source":"Varkey Foundation Global Student Prize","source_url":"https://www.varkeyfoundation.org/global-student-prize","evidence_patterns":["innovation","peer_impact","global_citizenship"]},
+  {"cycle":2023,"level":"winner","project":"Refugee education, peacebuilding and entrepreneurship programs","source":"Varkey Foundation Global Student Prize","source_url":"https://www.varkeyfoundation.org/global-student-prize","evidence_patterns":["sustained_impact","scale","leadership","resilience"]}
+ ],
+ "The Earth Prize":[
+  {"cycle":2026,"level":"official_finalist_set","project":"Use organizer 2026 Winners & Finalists archive for live expert review","source":"The Earth Prize 2026 Winners & Finalists","source_url":"https://www.theearthprize.org/","evidence_patterns":["environmental_relevance","solution_evidence","implementation_path"]}
+ ],
+ "IRIS National Fair":[],"RSI at MIT":[],"Conrad Challenge":[],"Stockholm Junior Water Prize":[],"Diamond Challenge":[],"Diana Award":[],"GSL Global Goals Competition":[]
+}

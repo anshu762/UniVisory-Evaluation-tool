@@ -1,0 +1,1240 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+     <link rel="icon" type="image/svg+xml" href="/favicon.webp" />
+    <title>UniVisory EDGE | Global Opportunity Intelligence</title>
+    <style>
+      :root {
+        font-family: Inter, Arial, sans-serif;
+        color: #18243b;
+        background: #f4f7fb;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      header {
+        background: #101f3b;
+        color: white;
+        padding: 22px max(5%, calc((100% - 1100px) / 2));
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .brand {
+        font-weight: 800;
+        letter-spacing: 0.06em;
+      }
+      main {
+        max-width: 1100px;
+        margin: 48px auto;
+        padding: 0 20px;
+      }
+      .hero {
+        max-width: 780px;
+      }
+      h1 {
+        font-size: clamp(32px, 5vw, 54px);
+        line-height: 1.1;
+        margin: 10px 0;
+      }
+      p {
+        line-height: 1.6;
+        color: #56637b;
+      }
+      .eyebrow {
+        color: #2764c9;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+      .panel {
+        background: white;
+        border: 1px solid #e0e6f0;
+        border-radius: 18px;
+        padding: 28px;
+        margin: 26px 0;
+        box-shadow: 0 8px 30px #13244309;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      label {
+        display: block;
+        font-weight: 700;
+        font-size: 14px;
+        margin: 16px 0 8px;
+      }
+      select,
+      textarea,
+      input {
+        width: 100%;
+        border: 1px solid #cbd5e1;
+        border-radius: 9px;
+        padding: 13px;
+        font: inherit;
+        background: white;
+      }
+      textarea {
+        min-height: 200px;
+        resize: vertical;
+      }
+      button {
+        background: #1b4eac;
+        color: white;
+        border: 0;
+        border-radius: 9px;
+        padding: 14px 20px;
+        font-weight: 750;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .tabs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .tabs button {
+        background: #edf2fa;
+        color: #203858;
+      }
+      .tabs button.active {
+        background: #1b4eac;
+        color: white;
+      }
+      .notice {
+        padding: 16px;
+        background: #edf5ff;
+        border-left: 4px solid #3170c5;
+        border-radius: 8px;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .status {
+        margin-top: 18px;
+        white-space: pre-wrap;
+      }
+      .muted {
+        font-size: 13px;
+        color: #64748b;
+      }
+      .hidden {
+        display: none;
+      }
+      .mentor-connect {
+        background:
+            linear-gradient(135deg, #102346, #1b4eac);
+        color: white;
+        border-radius: 18px;
+        padding: 24px 26px;
+        margin: 26px 0;
+        box-shadow: 0 10px 28px #1324431c;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 22px;
+        }
+
+        .mentor-connect h2 {
+        margin: 0 0 8px;
+        color: white;
+        }
+
+        .mentor-connect p {
+        margin: 0;
+        color: #dce9ff;
+        max-width: 690px;
+        }
+
+        .mentor-connect-button {
+        flex: 0 0 auto;
+        background: white;
+        color: #174ea6;
+        border: 0;
+        border-radius: 9px;
+        padding: 13px 18px;
+        font-weight: 800;
+        cursor: pointer;
+        white-space: nowrap;
+        }
+
+        .mentor-connect-button:hover {
+        background: #edf5ff;
+        transform: translateY(-1px);
+        }
+
+        .mentor-connect-status {
+        color: #dce9ff;
+        font-size: 13px;
+        margin-top: 10px;
+        }
+
+        @media (max-width: 700px) {
+        .mentor-connect {
+            display: block;
+        }
+
+        .mentor-connect-button {
+            margin-top: 18px;
+            width: 100%;
+        }
+        }
+
+        @media print {
+        .mentor-connect {
+            display: none;
+        }
+        }
+      footer {
+        text-align: center;
+        padding: 35px;
+        color: #64748b;
+        font-size: 12px;
+      }
+      @media (max-width: 650px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        header {
+          padding: 20px;
+        }
+        main {
+          margin: 28px auto;
+        }
+        .short-report-mentor {
+            margin-top: 24px;
+            padding: 22px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #102346, #1b4eac);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            }
+
+            .short-report-mentor-content {
+            min-width: 0;
+            }
+
+            .short-report-mentor h3 {
+            color: white;
+            margin: 0 0 7px;
+            }
+
+            .short-report-mentor p {
+            color: #dce9ff;
+            margin: 0;
+            line-height: 1.55;
+            }
+
+            .short-report-mentor-button {
+            flex: 0 0 auto;
+            background: white;
+            color: #174ea6;
+            border: 0;
+            border-radius: 9px;
+            padding: 13px 18px;
+            font-weight: 800;
+            cursor: pointer;
+            white-space: nowrap;
+            }
+
+            .short-report-mentor-button:hover {
+            background: #edf5ff;
+            transform: translateY(-1px);
+            }
+
+            .short-report-mentor-status {
+            margin-top: 9px;
+            color: #dce9ff;
+            font-size: 13px;
+            }
+
+            @media (max-width: 650px) {
+            .short-report-mentor {
+                display: block;
+            }
+
+            .short-report-mentor-button {
+                width: 100%;
+                margin-top: 17px;
+            }
+            }
+
+            @media print {
+            .short-report-mentor {
+                display: none;
+            }
+            }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        UNIVISORY <span style="font-weight: 400">/ EDGE</span>
+      </div>
+      <span style="font-size: 12px">OPPORTUNITY INTELLIGENCE</span>
+    </header>
+    <main>
+      <div class="hero">
+        <div class="eyebrow">Global Opportunity Intelligence</div>
+        <h1 id="heroQuestion">How competitive is your work?</h1>
+        <p id="heroCopy">
+          Choose your target opportunity and receive a competition-specific,
+          evidence-led strength assessment.
+        </p>
+      </div>
+      <section class="mentor-connect">
+        <div>
+            <div class="eyebrow" style="color: #bcd5ff">
+            Mentor guidance
+            </div>
+
+            <h2>Want expert feedback on your project?</h2>
+
+            <p>
+            Connect with a UniVisory mentor to discuss your assessment,
+            clarify improvement priorities and plan your next steps.
+            </p>
+
+            <div
+            id="mentorConnectStatus"
+            class="mentor-connect-status"
+            ></div>
+        </div>
+
+        <button
+            id="connectMentor"
+            class="mentor-connect-button"
+            type="button"
+        >
+            Connect with a mentor
+        </button>
+      </section>
+      <section class="panel">
+        <div class="eyebrow">00 / Student and parent details</div>
+
+        <div class="grid">
+            <div>
+            <label for="studentName">Student name</label>
+            <input id="studentName" required maxlength="160" />
+            </div>
+
+            <div>
+            <label for="parentName">Parent name</label>
+            <input id="parentName" required maxlength="160" />
+            </div>
+
+            <div>
+            <label for="parentPhone">Parent phone number</label>
+            <input
+                id="parentPhone"
+                type="tel"
+                required
+                maxlength="40"
+            />
+            </div>
+
+            <div>
+            <label for="parentEmail">Parent email</label>
+            <input
+                id="parentEmail"
+                type="email"
+                required
+                maxlength="254"
+            />
+            </div>
+        </div>
+        </section>
+      <section class="panel">
+        <div class="eyebrow">01 / Project details</div>
+        <div class="grid">
+          <div>
+            <label for="competition">Target competition</label
+            ><select id="competition">
+              <option value="">Choose a competition</option>
+              <option>IRIS National Fair</option>
+              <option>Regeneron ISEF</option>
+              <option>RSI at MIT</option>
+              <option>Conrad Challenge</option>
+              <option>The Earth Prize</option>
+              <option>Stockholm Junior Water Prize</option>
+              <option>Diamond Challenge</option>
+              <option>Blue Ocean Competition</option>
+              <option>Technovation Girls</option>
+              <option>Diana Award</option>
+              <option>GSL Global Goals Competition</option>
+              <option>Global Student Prize</option>
+            </select>
+          </div>
+          <div>
+            <label for="grade">Student grade / year</label
+            ><select id="grade">
+              <option value="">Select grade</option>
+              <option>Grade 8</option>
+              <option>Grade 9</option>
+              <option>Grade 10</option>
+              <option>Grade 11</option>
+              <option>Grade 12</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <label for="country">Country of residence (for eligibility)</label
+        ><input id="country" placeholder="e.g. India" />
+      </section>
+      <section class="panel">
+        <div class="eyebrow" id="section2eyebrow">
+          02 / Competition-specific submission
+        </div>
+        <h2 id="section2title">Evaluate your work</h2>
+        <p id="competitionHelp" class="muted">
+          Choose a competition above. This section will adapt to its actual
+          evidence and submission type.
+        </p>
+        <div class="tabs" id="tabs"></div>
+        <label id="entrylabel" for="entry">Research idea</label
+        ><textarea
+          id="entry"
+          placeholder="Describe the problem, your proposed innovation and what is different from existing approaches..."
+        ></textarea>
+        <div class="grid">
+          <div>
+            <label for="evidence">Evidence / references (optional)</label
+            ><textarea
+              id="evidence"
+              style="min-height: 110px"
+              placeholder="Paste DOI links, papers or supporting evidence"
+            ></textarea>
+          </div>
+          <div>
+            <label for="constraints">Resources and timeline (optional)</label
+            ><textarea
+              id="constraints"
+              style="min-height: 110px"
+              placeholder="Available equipment, data, budget, deadline..."
+            ></textarea>
+          </div>
+        </div>
+        <p class="muted" id="wordcount">0 words</p>
+        <div class="notice">
+          Scores are advisory and must be linked to verified evidence. A score
+          is not a probability of winning. The hosted AI service must verify
+          official competition criteria and disclose when literature searches
+          are incomplete.
+        </div>
+        <div
+          style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px"
+        >
+          <button id="evaluate">Evaluate</button
+          ><button id="save" style="background: #e9eff8; color: #19365e">
+            Save draft locally
+          </button>
+        </div>
+        <div id="status" class="status" role="status"></div>
+        <div id="report" class="panel hidden" aria-live="polite"></div>
+      </section>
+      <section class="panel">
+        <div class="eyebrow">How assessment works</div>
+        <div class="grid">
+          <div>
+            <h3>Scientific assessment</h3>
+            <p>
+              Novelty, methodological rigour, technical depth, validation and
+              significance, with explicit supporting sources and uncertainty.
+            </p>
+          </div>
+          <div>
+            <h3>Competition alignment</h3>
+            <p>
+              Eligibility and published competition criteria, with internal
+              scoring clearly separated from official judging rules.
+            </p>
+          </div>
+        </div>
+        <p class="muted">
+          Student-authored submissions remain the student's own work. AI
+          feedback should not automatically rewrite materials where competition
+          rules restrict AI-generated content.
+        </p>
+      </section>
+    </main>
+    <footer>
+      UniVisory EDGE · Global Opportunity Intelligence · Prototype · No research
+      content is transmitted until a backend is configured.
+    </footer>
+    <!-- <script
+    src="https://assets.calendly.com/assets/external/widget.js"
+    async
+    ></script> -->
+
+    <script>
+      const $ = (id) =>
+        document.getElementById(id);
+
+        const CALENDLY_URL =
+        "https://calendly.com/geetika-univisory/univisory-counseling";
+
+        function openMentorCalendly() {
+        const calendlyUrl =
+            new URL(CALENDLY_URL);
+
+        if (
+            calendlyUrl.protocol !== "https:" ||
+            calendlyUrl.hostname !== "calendly.com"
+        ) {
+            console.error(
+            "Invalid Calendly URL:",
+            CALENDLY_URL
+            );
+
+            return;
+        }
+
+        window.location.assign(
+            calendlyUrl.toString()
+        );
+        }
+
+        const connectMentorButton =
+        $("connectMentor");
+
+        if (connectMentorButton) {
+        connectMentorButton.addEventListener(
+            "click",
+            openMentorCalendly
+        );
+        }
+
+      let KB = {},
+        stage = "";
+      const comp = $("competition"),
+        tabs = $("tabs");
+      function key() {
+        return "univisory-edge-" + comp.value + "-" + stage;
+      }
+      function count() {
+        $("wordcount").textContent =
+          ($("entry").value.trim().match(/\S+/g) || []).length + " words";
+      }
+      const QUESTIONS = {
+        "IRIS National Fair": "How strong is your IRIS project?",
+        "Regeneron ISEF": "How strong is your ISEF project?",
+        "RSI at MIT": "How strong is your RSI candidacy?",
+        "Conrad Challenge": "How competitive is your Conrad innovation?",
+        "The Earth Prize": "How strong is your sustainability solution?",
+        "Stockholm Junior Water Prize": "How strong is your water research?",
+        "Diamond Challenge": "How strong is your venture?",
+        "Blue Ocean Competition": "How differentiated is your Blue Ocean idea?",
+        "Technovation Girls": "How strong is your technology solution?",
+        "Diana Award": "How strong is your impact journey?",
+        "GSL Global Goals Competition":
+          "How strong is your Global Goals project?",
+        "Global Student Prize":
+          "How distinctive is your student impact profile?",
+      };
+      function renderStages() {
+        const c = KB[comp.value];
+        tabs.replaceChildren();
+        $("heroQuestion").textContent =
+          QUESTIONS[comp.value] || "How competitive is your work?";
+        if (!c) {
+          $("competitionHelp").textContent =
+            "Choose a competition above. This section will adapt to its actual evidence and submission type.";
+          return;
+        }
+        $("competitionHelp").textContent = c.source + " " + c.rules;
+        c.stages.forEach((s, i) => {
+          const b = document.createElement("button");
+          b.textContent = s[1];
+          b.dataset.stage = s[0];
+          b.className = i === 0 ? "active" : "";
+          b.onclick = () => selectStage(s[0], b);
+          tabs.appendChild(b);
+        });
+        selectStage(c.stages[0][0], tabs.firstChild);
+      }
+      function selectStage(s, b) {
+        if (stage && comp.value) localStorage.setItem(key(), $("entry").value);
+        stage = s;
+        [...tabs.children].forEach((x) =>
+          x.classList.toggle("active", x === b),
+        );
+        const c = KB[comp.value];
+        $("entrylabel").textContent = (c.stages.find((x) => x[0] === s) || [
+          "",
+          "Submission",
+        ])[1];
+        $("entry").placeholder =
+          c.stage_help[s] || "Paste your content here...";
+        $("entry").value = localStorage.getItem(key()) || "";
+        count();
+        $("status").textContent = "";
+      }
+      function add(parent, tag, text) {
+        const e = document.createElement(tag);
+        e.textContent = text;
+        parent.appendChild(e);
+        return e;
+      }
+
+    function renderReport(d) {
+  const r = $("report");
+  const short = d.short_report || {};
+
+  r.classList.remove("hidden");
+  r.replaceChildren();
+
+  add(
+    r,
+    "h2",
+    "EDGE Strength Assessment"
+  );
+
+  add(
+    r,
+    "p",
+    (short.competition || "") +
+      " · " +
+      (short.stage || "")
+  );
+
+  add(
+    r,
+    "h3",
+    short.edge_strength_assessment ||
+      "Assessment completed."
+  );
+
+  add(
+    r,
+    "p",
+    short.competition_aligned_strength ||
+      "Competition alignment was assessed."
+  );
+
+  add(
+    r,
+    "h3",
+    "Strength by criterion"
+  );
+
+  (short.strength_by_criterion || []).forEach(
+    (item) => {
+      add(
+        r,
+        "p",
+        (item.title || "Criterion") +
+          " — " +
+          (
+            item.score === null ||
+            item.score === undefined
+              ? "Not assessable"
+              : item.score + "/5"
+          )
+      );
+    }
+  );
+
+  /*
+   * This is the existing short-report message.
+   * The mentor button will be placed immediately after it.
+   */
+  const notice = add(
+    r,
+    "div",
+    short.message ||
+      "Your short assessment is ready. A UniVisory mentor can provide the detailed report and improvement priorities."
+  );
+
+  notice.className = "notice";
+
+  /*
+   * Mentor button only.
+   * No mentor title or mentor description are added here.
+   */
+    const mentorButton =
+    document.createElement("button");
+
+    mentorButton.type = "button";
+    mentorButton.className =
+    "short-report-mentor-button";
+    mentorButton.textContent =
+    "Connect with a mentor";
+
+    mentorButton.style.marginTop = "16px";
+
+    mentorButton.addEventListener(
+    "click",
+    openMentorCalendly
+    );
+
+    r.appendChild(mentorButton);
+
+//   if (d.evaluation_id) {
+//     add(
+//       r,
+//       "p",
+//       "Evaluation reference: " +
+//         d.evaluation_id
+//     );
+//   }
+}
+
+      $("entry").oninput = count;
+      $("save").onclick = () => {
+        localStorage.setItem(key(), $("entry").value);
+        $("status").textContent = "Draft saved locally.";
+      };
+      comp.onchange = renderStages;
+      $("evaluate").onclick = async () => {
+        if (
+        !$("studentName").value.trim() ||
+        !$("parentName").value.trim() ||
+        !$("parentPhone").value.trim() ||
+        !$("parentEmail").value.trim() ||
+        !comp.value ||
+        !stage ||
+        $("entry").value.trim().length < 80
+        ) {
+        $("status").textContent =
+            "Please complete the student, parent and project fields. The project description must contain at least 80 characters.";
+        return;
+        }
+        const p = {
+            student_name: $("studentName").value.trim(),
+            parent_name: $("parentName").value.trim(),
+            parent_phone: $("parentPhone").value.trim(),
+            parent_email: $("parentEmail").value.trim(),
+
+          competition: comp.value,
+          stage,
+          grade: $("grade").value,
+          country: $("country").value,
+          content: $("entry").value,
+          evidence: $("evidence").value,
+          constraints: $("constraints").value,
+        };
+        $("evaluate").disabled = true;
+        $("status").textContent = "Running competition-specific assessment...";
+        try {
+          const res = await fetch("/api/evaluate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(p),
+          });
+          const d = await res.json();
+          if (!res.ok) throw Error(d.error || "Assessment failed");
+          renderReport(d);
+          $("status").textContent = "Assessment complete.";
+        } catch (e) {
+          $("status").textContent = e.message;
+        } finally {
+          $("evaluate").disabled = false;
+        }
+      };
+      (async () => {
+        try {
+          const r = await fetch("/api/config");
+          KB = await r.json();
+          renderStages();
+        } catch (e) {
+          $("status").textContent =
+            "Run the backend server to load competition intelligence.";
+        }
+      })();
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>UniVisory EDGE | Global Opportunity Intelligence</title>
+    <style>
+      :root {
+        font-family: Inter, Arial, sans-serif;
+        color: #18243b;
+        background: #f4f7fb;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      header {
+        background: #101f3b;
+        color: white;
+        padding: 22px max(5%, calc((100% - 1100px) / 2));
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .brand {
+        font-weight: 800;
+        letter-spacing: 0.06em;
+      }
+      main {
+        max-width: 1100px;
+        margin: 48px auto;
+        padding: 0 20px;
+      }
+      .hero {
+        max-width: 780px;
+      }
+      h1 {
+        font-size: clamp(32px, 5vw, 54px);
+        line-height: 1.1;
+        margin: 10px 0;
+      }
+      p {
+        line-height: 1.6;
+        color: #56637b;
+      }
+      .eyebrow {
+        color: #2764c9;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+      .panel {
+        background: white;
+        border: 1px solid #e0e6f0;
+        border-radius: 18px;
+        padding: 28px;
+        margin: 26px 0;
+        box-shadow: 0 8px 30px #13244309;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      label {
+        display: block;
+        font-weight: 700;
+        font-size: 14px;
+        margin: 16px 0 8px;
+      }
+      select,
+      textarea,
+      input {
+        width: 100%;
+        border: 1px solid #cbd5e1;
+        border-radius: 9px;
+        padding: 13px;
+        font: inherit;
+        background: white;
+      }
+      textarea {
+        min-height: 200px;
+        resize: vertical;
+      }
+      button {
+        background: #1b4eac;
+        color: white;
+        border: 0;
+        border-radius: 9px;
+        padding: 14px 20px;
+        font-weight: 750;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .tabs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .tabs button {
+        background: #edf2fa;
+        color: #203858;
+      }
+      .tabs button.active {
+        background: #1b4eac;
+        color: white;
+      }
+      .notice {
+        padding: 16px;
+        background: #edf5ff;
+        border-left: 4px solid #3170c5;
+        border-radius: 8px;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .status {
+        margin-top: 18px;
+        white-space: pre-wrap;
+      }
+      .muted {
+        font-size: 13px;
+        color: #64748b;
+      }
+      .hidden {
+        display: none;
+      }
+      footer {
+        text-align: center;
+        padding: 35px;
+        color: #64748b;
+        font-size: 12px;
+      }
+      @media (max-width: 650px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        header {
+          padding: 20px;
+        }
+        main {
+          margin: 28px auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        UNIVISORY <span style="font-weight: 400">/ EDGE</span>
+      </div>
+      <span style="font-size: 12px">OPPORTUNITY INTELLIGENCE</span>
+    </header>
+    <main>
+      <div class="hero">
+        <div class="eyebrow">Global Opportunity Intelligence</div>
+        <h1 id="heroQuestion">How competitive is your work?</h1>
+        <p id="heroCopy">
+          Choose your target opportunity and receive a competition-specific,
+          evidence-led strength assessment.
+        </p>
+      </div>
+      <section class="panel">
+        <div class="eyebrow">01 / Project details</div>
+        <div class="grid">
+          <div>
+            <label for="competition">Target competition</label
+            ><select id="competition">
+              <option value="">Choose a competition</option>
+              <option>IRIS National Fair</option>
+              <option>Regeneron ISEF</option>
+              <option>RSI at MIT</option>
+              <option>Conrad Challenge</option>
+              <option>The Earth Prize</option>
+              <option>Stockholm Junior Water Prize</option>
+              <option>Diamond Challenge</option>
+              <option>Blue Ocean Competition</option>
+              <option>Technovation Girls</option>
+              <option>Diana Award</option>
+              <option>GSL Global Goals Competition</option>
+              <option>Global Student Prize</option>
+            </select>
+          </div>
+          <div>
+            <label for="grade">Student grade / year</label
+            ><select id="grade">
+              <option value="">Select grade</option>
+              <option>Grade 8</option>
+              <option>Grade 9</option>
+              <option>Grade 10</option>
+              <option>Grade 11</option>
+              <option>Grade 12</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <label for="country">Country of residence (for eligibility)</label
+        ><input id="country" placeholder="e.g. India" />
+      </section>
+      <section class="panel">
+        <div class="eyebrow" id="section2eyebrow">
+          02 / Competition-specific submission
+        </div>
+        <h2 id="section2title">Evaluate your work</h2>
+        <p id="competitionHelp" class="muted">
+          Choose a competition above. This section will adapt to its actual
+          evidence and submission type.
+        </p>
+        <div class="tabs" id="tabs"></div>
+        <label id="entrylabel" for="entry">Research idea</label
+        ><textarea
+          id="entry"
+          placeholder="Describe the problem, your proposed innovation and what is different from existing approaches..."
+        ></textarea>
+        <div class="grid">
+          <div>
+            <label for="evidence">Evidence / references (optional)</label
+            ><textarea
+              id="evidence"
+              style="min-height: 110px"
+              placeholder="Paste DOI links, papers or supporting evidence"
+            ></textarea>
+          </div>
+          <div>
+            <label for="constraints">Resources and timeline (optional)</label
+            ><textarea
+              id="constraints"
+              style="min-height: 110px"
+              placeholder="Available equipment, data, budget, deadline..."
+            ></textarea>
+          </div>
+        </div>
+        <p class="muted" id="wordcount">0 words</p>
+        <div class="notice">
+          Scores are advisory and must be linked to verified evidence. A score
+          is not a probability of winning. The hosted AI service must verify
+          official competition criteria and disclose when literature searches
+          are incomplete.
+        </div>
+        <div
+          style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px"
+        >
+          <button id="evaluate">Evaluate with AI</button
+          ><button id="save" style="background: #e9eff8; color: #19365e">
+            Save draft locally
+          </button>
+        </div>
+        <div id="status" class="status" role="status"></div>
+        <div id="report" class="panel hidden" aria-live="polite"></div>
+      </section>
+      <section class="panel">
+        <div class="eyebrow">How assessment works</div>
+        <div class="grid">
+          <div>
+            <h3>Scientific assessment</h3>
+            <p>
+              Novelty, methodological rigour, technical depth, validation and
+              significance, with explicit supporting sources and uncertainty.
+            </p>
+          </div>
+          <div>
+            <h3>Competition alignment</h3>
+            <p>
+              Eligibility and published competition criteria, with internal
+              scoring clearly separated from official judging rules.
+            </p>
+          </div>
+        </div>
+        <p class="muted">
+          Student-authored submissions remain the student's own work. AI
+          feedback should not automatically rewrite materials where competition
+          rules restrict AI-generated content.
+        </p>
+      </section>
+    </main>
+    <footer>
+      UniVisory EDGE · Global Opportunity Intelligence · Prototype · No research
+      content is transmitted until a backend is configured.
+    </footer>
+    <script>
+      const $ = (id) => document.getElementById(id);
+      let KB = {},
+        stage = "";
+      const comp = $("competition"),
+        tabs = $("tabs");
+      function key() {
+        return "univisory-edge-" + comp.value + "-" + stage;
+      }
+      function count() {
+        $("wordcount").textContent =
+          ($("entry").value.trim().match(/\S+/g) || []).length + " words";
+      }
+      const QUESTIONS = {
+        "IRIS National Fair": "How strong is your IRIS project?",
+        "Regeneron ISEF": "How strong is your ISEF project?",
+        "RSI at MIT": "How strong is your RSI candidacy?",
+        "Conrad Challenge": "How competitive is your Conrad innovation?",
+        "The Earth Prize": "How strong is your sustainability solution?",
+        "Stockholm Junior Water Prize": "How strong is your water research?",
+        "Diamond Challenge": "How strong is your venture?",
+        "Blue Ocean Competition": "How differentiated is your Blue Ocean idea?",
+        "Technovation Girls": "How strong is your technology solution?",
+        "Diana Award": "How strong is your impact journey?",
+        "GSL Global Goals Competition":
+          "How strong is your Global Goals project?",
+        "Global Student Prize":
+          "How distinctive is your student impact profile?",
+      };
+      function renderStages() {
+        const c = KB[comp.value];
+        tabs.replaceChildren();
+        $("heroQuestion").textContent =
+          QUESTIONS[comp.value] || "How competitive is your work?";
+        if (!c) {
+          $("competitionHelp").textContent =
+            "Choose a competition above. This section will adapt to its actual evidence and submission type.";
+          return;
+        }
+        $("competitionHelp").textContent = c.source + " " + c.rules;
+        c.stages.forEach((s, i) => {
+          const b = document.createElement("button");
+          b.textContent = s[1];
+          b.dataset.stage = s[0];
+          b.className = i === 0 ? "active" : "";
+          b.onclick = () => selectStage(s[0], b);
+          tabs.appendChild(b);
+        });
+        selectStage(c.stages[0][0], tabs.firstChild);
+      }
+      function selectStage(s, b) {
+        if (stage && comp.value) localStorage.setItem(key(), $("entry").value);
+        stage = s;
+        [...tabs.children].forEach((x) =>
+          x.classList.toggle("active", x === b),
+        );
+        const c = KB[comp.value];
+        $("entrylabel").textContent = (c.stages.find((x) => x[0] === s) || [
+          "",
+          "Submission",
+        ])[1];
+        $("entry").placeholder =
+          c.stage_help[s] || "Paste your content here...";
+        $("entry").value = localStorage.getItem(key()) || "";
+        count();
+        $("status").textContent = "";
+      }
+      function add(parent, tag, text) {
+        const e = document.createElement(tag);
+        e.textContent = text;
+        parent.appendChild(e);
+        return e;
+      }
+      function renderReport(d) {
+        const r = $("report");
+        r.classList.remove("hidden");
+        r.replaceChildren();
+        add(r, "h2", "EDGE Strength Assessment");
+        add(r, "p", d.competition + " · " + d.stage);
+        add(
+          r,
+          "h3",
+          "Competition-aligned strength: " +
+            (d.provisional_score_out_of_100 ?? "Not assessable") +
+            " / 100",
+        );
+        add(r, "p", d.score_disclaimer);
+        add(r, "p", "Source basis: " + d.source_basis);
+        add(r, "h3", "Strength by criterion");
+        Object.entries(d.criteria || {}).forEach(([n, x]) => {
+          add(
+            r,
+            "h4",
+            n.replaceAll("_", " ") +
+              " — " +
+              (x.score === null ? "Not assessable" : x.score + "/5") +
+              " · " +
+              x.weight +
+              "%",
+          );
+          add(r, "p", x.reason || "Insufficient evidence");
+          if (x.uncertainty) add(r, "p", "Uncertainty: " + x.uncertainty);
+        });
+        add(r, "h3", "Your strongest signals");
+        (d.strengths || []).forEach((v) => add(r, "p", "• " + v));
+        const box = add(
+          r,
+          "div",
+          "Your assessment stops here. A UniVisory mentor can review the critical gaps, competition gates, improvement priorities and next-step strategy with you.",
+        );
+        box.className = "notice";
+        const btn = add(r, "button", "Connect with a UniVisory Mentor");
+        btn.style.marginTop = "16px";
+        btn.onclick = () => {
+          window.dispatchEvent(
+            new CustomEvent("urie-connect", {
+              detail: { competition: d.competition, stage: d.stage },
+            }),
+          );
+        };
+      }
+      $("entry").oninput = count;
+      $("save").onclick = () => {
+        localStorage.setItem(key(), $("entry").value);
+        $("status").textContent = "Draft saved locally.";
+      };
+      comp.onchange = renderStages;
+      $("evaluate").onclick = async () => {
+        if (!comp.value || !stage || !$("entry").value.trim()) {
+          $("status").textContent = "Select a competition and add content.";
+          return;
+        }
+        const p = {
+          competition: comp.value,
+          stage,
+          grade: $("grade").value,
+          country: $("country").value,
+          content: $("entry").value,
+          evidence: $("evidence").value,
+          constraints: $("constraints").value,
+        };
+        $("evaluate").disabled = true;
+        $("status").textContent = "Running competition-specific assessment...";
+        try {
+          const res = await fetch("/api/evaluate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(p),
+          });
+          const d = await res.json();
+          if (!res.ok) throw Error(d.error || "Assessment failed");
+          renderReport(d);
+          $("status").textContent = "Assessment complete.";
+        } catch (e) {
+          $("status").textContent = e.message;
+        } finally {
+          $("evaluate").disabled = false;
+        }
+      };
+      (async () => {
+        try {
+          const r = await fetch("/api/config");
+          KB = await r.json();
+          renderStages();
+        } catch (e) {
+          $("status").textContent =
+            "Run the backend server to load competition intelligence.";
+        }
+      })();
+    </script>
+  </body>
+</html> -->

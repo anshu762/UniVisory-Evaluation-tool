@@ -1,0 +1,482 @@
+{
+  "IRIS National Fair": {
+    "family": "research_fair",
+    "official": false,
+    "source": "IRIS submission guidelines + current portal; IRIS does not publish a simple public judging weight table.",
+    "criteria": {
+      "originality_and_gap": 22,
+      "scientific_question": 10,
+      "methodological_rigour": 20,
+      "technical_depth": 13,
+      "results_and_validation": 20,
+      "significance_and_impact": 10,
+      "student_mastery_and_communication": 5
+    },
+    "stages": [
+      [
+        "idea",
+        "01 · Research Idea & Gap"
+      ],
+      [
+        "methodology",
+        "02 · Research Design & Methodology"
+      ],
+      [
+        "submission",
+        "03 · IRIS Submission Pack"
+      ]
+    ],
+    "stage_help": {
+      "idea": "Problem, prior work, research gap, hypothesis/question, proposed contribution and why it may be new.",
+      "methodology": "Variables, controls/comparators, sample/data, protocol, metrics, statistical/analytical plan, ethics/safety, resources and failure modes.",
+      "submission": "Paste the student-authored IRIS submission content: abstract, introduction/objective, innovation, methodology, results/conclusions and references. The engine also checks video/readiness requirements."
+    },
+    "gates": [
+      "eligibility",
+      "student_ownership",
+      "ethics_safety",
+      "research_age_and_rules",
+      "evidence_of_execution"
+    ],
+    "rules": "Original research/innovation, not display-only work. Current portal and annual guidelines control. Submission/video anonymity and current research-age/rules must be checked."
+  },
+  "Regeneron ISEF": {
+    "family": "research_fair",
+    "official": true,
+    "source": "Society for Science Grand Award Judging Criteria, 2027 International Rules.",
+    "criteria": {
+      "question_or_problem": 10,
+      "methodology": 15,
+      "execution_and_analysis": 20,
+      "creativity_and_potential_impact": 20,
+      "presentation_and_interview": 35
+    },
+    "stages": [
+      [
+        "idea",
+        "01 · Question / Problem"
+      ],
+      [
+        "methodology",
+        "02 · Research Plan & Compliance"
+      ],
+      [
+        "submission",
+        "03 · Results, Poster & Interview Readiness"
+      ]
+    ],
+    "stage_help": {
+      "idea": "Research question/problem, gap, hypothesis/design goal, novelty and potential impact.",
+      "methodology": "Research plan, controls, sample/data, analysis, risk assessment, approvals/forms, regulated research issues and reproducibility.",
+      "submission": "Results, analysis, limitations, abstract/poster narrative and evidence that the student can defend the work in depth."
+    },
+    "gates": [
+      "eligibility_route",
+      "student_ownership",
+      "pre_approval_compliance",
+      "ethics_safety",
+      "continuation_project_rules"
+    ],
+    "rules": "Cannot apply directly; affiliated-fair route. Annual ISEF rules/forms and pre-approvals can be gating requirements."
+  },
+  "RSI at MIT": {
+    "family": "student_selection",
+    "official": false,
+    "source": "CEE RSI materials: holistic review; complete essays, recommendations, transcript and available testing; prior research helpful but not required.",
+    "criteria": {
+      "academic_stem_strength": 22,
+      "intellectual_curiosity": 18,
+      "research_potential": 20,
+      "stem_distinction_and_initiative": 12,
+      "essays_and_intellectual_voice": 13,
+      "recommendations": 10,
+      "community_leadership_and_fit": 5
+    },
+    "stages": [
+      [
+        "profile",
+        "01 · Candidate Profile"
+      ],
+      [
+        "application",
+        "02 · Application Evidence"
+      ],
+      [
+        "submission",
+        "03 · Essays, LORs & Final Readiness"
+      ]
+    ],
+    "stage_help": {
+      "profile": "Grade, rigorous STEM coursework, scores if available, olympiads/competitions, research exposure, independent learning, leadership and intellectual interests.",
+      "application": "Evidence behind the profile: research role, outputs, distinctions, depth of subject engagement, activities, community contribution and recommenders.",
+      "submission": "Paste student-authored essay drafts/answers or summaries, recommender context, transcript/GPA context and final application evidence. The engine critiques alignment and gaps; it does not rewrite restricted student work."
+    },
+    "gates": [
+      "grade_eligibility",
+      "application_completeness",
+      "student_authenticity",
+      "recommendation_readiness"
+    ],
+    "rules": "RSI selects the student, not a single project. Do not score it as a science-fair project. Use current CEE application instructions for cycle-specific eligibility/deadlines."
+  },
+  "Conrad Challenge": {
+    "family": "innovation_venture",
+    "official": true,
+    "source": "Conrad Innovation Stage scoring guide (stage-specific; current-cycle guide must be reconfirmed).",
+    "criteria": {
+      "innovation": 30,
+      "market_and_customer_understanding": 20,
+      "business_model_and_value": 20,
+      "execution_and_feasibility": 10,
+      "storytelling_and_professionalism": 20
+    },
+    "stages": [
+      [
+        "idea",
+        "01 · Innovation Concept"
+      ],
+      [
+        "validation",
+        "02 · Product, Market & Validation"
+      ],
+      [
+        "submission",
+        "03 · Innovation Stage Submission"
+      ]
+    ],
+    "stage_help": {
+      "idea": "Problem, customer/user, proposed innovation, existing alternatives, differentiation, IP/defensibility and potential impact.",
+      "validation": "Prototype status, technical feasibility, user/customer evidence, market sizing, business model, implementation, testing and iteration.",
+      "submission": "Innovation brief/materials, pitch/video narrative, evidence, team roles, defensibility and current stage deliverables."
+    },
+    "gates": [
+      "team_eligibility",
+      "student_ownership",
+      "originality",
+      "feasibility",
+      "submission_stage_rules"
+    ],
+    "rules": "Competition is stage-based. Apply the rubric for the actual stage/cycle, not one generic research rubric."
+  },
+  "The Earth Prize": {
+    "family": "environment_innovation",
+    "official": false,
+    "source": "Official programme/submission materials; public percentage weights may not be published for every cycle.",
+    "criteria": {
+      "environmental_problem_and_evidence": 18,
+      "innovation_and_differentiation": 20,
+      "environmental_impact": 22,
+      "feasibility_and_implementation": 15,
+      "stakeholders_and_adoption": 10,
+      "longevity_and_scalability": 10,
+      "communication": 5
+    },
+    "stages": [
+      [
+        "idea",
+        "01 · Environmental Solution"
+      ],
+      [
+        "validation",
+        "02 · Impact & Implementation Evidence"
+      ],
+      [
+        "submission",
+        "03 · Earth Prize Submission"
+      ]
+    ],
+    "stage_help": {
+      "idea": "Environmental problem, evidence of need, affected ecosystem/community, proposed solution and differentiation.",
+      "validation": "Prototype/pilot, impact metrics, baseline/comparator, stakeholder testing, implementation, financial/resource feasibility, longevity and risks.",
+      "submission": "Paste the current application/submission answers and evidence; the engine maps them to impact, innovation, feasibility, stakeholders, longevity and communication."
+    },
+    "gates": [
+      "age_and_school_eligibility",
+      "environmental_relevance",
+      "student_ownership",
+      "ethics_safety",
+      "evidence_integrity"
+    ],
+    "rules": "Environmental sustainability relevance is a hard fit gate. Current annual submission questions control."
+  },
+  "Stockholm Junior Water Prize": {
+    "family": "water_research",
+    "official": false,
+    "source": "SIWI international criteria: relevance/significance, creativity, methodology/subject knowledge, practical skills, report and presentation.",
+    "criteria": {
+      "water_relevance_and_significance": 20,
+      "creativity_and_innovation": 20,
+      "methodology_and_subject_knowledge": 25,
+      "execution_and_practical_skill": 15,
+      "environmental_and_social_value": 10,
+      "report_and_presentation": 10
+    },
+    "stages": [
+      [
+        "idea",
+        "01 · Water Research / Innovation Idea"
+      ],
+      [
+        "methodology",
+        "02 · Scientific Method & Execution"
+      ],
+      [
+        "submission",
+        "03 · Report, Poster & Presentation"
+      ]
+    ],
+    "stage_help": {
+      "idea": "Water challenge, scientific/social relevance, research question or design objective, existing approaches and proposed innovation.",
+      "methodology": "Scientifically accepted methods, experiments/monitoring, controls/comparators, data, analysis, practical execution and limitations.",
+      "submission": "Written report, abstract, essential results, impact, support received, poster/presentation narrative and defence readiness."
+    },
+    "gates": [
+      "age_school_eligibility",
+      "national_route",
+      "water_relevance",
+      "scientific_method",
+      "student_ownership"
+    ],
+    "rules": "International entry is through a participating country's national organiser; national rules/deadlines can differ."
+  },
+  "Diamond Challenge": {
+    "family": "entrepreneurship",
+    "official": false,
+    "source": "Diamond Challenge current-cycle rules/submission materials; no simple public percentage table should be invented.",
+    "criteria": {
+      "problem_and_customer_or_beneficiary": 18,
+      "solution_and_unique_value": 22,
+      "validation_and_traction": 18,
+      "business_or_social_model": 17,
+      "team_capability": 10,
+      "feasibility_and_scale": 10,
+      "pitch_clarity": 5
+    },
+    "stages": [
+      [
+        "idea",
+        "01 · Venture Concept"
+      ],
+      [
+        "validation",
+        "02 · Customer / Beneficiary Validation"
+      ],
+      [
+        "submission",
+        "03 · Concept & Pitch Submission"
+      ]
+    ],
+    "stage_help": {
+      "idea": "Problem, customer/beneficiary, solution, unique value proposition, alternatives and why this venture matters.",
+      "validation": "Interviews/testing, prototype/MVP, traction, economics or sustainability model, channels, partners, risks and iteration.",
+      "submission": "Concept document, video/pitch content, evidence of traction, team capability and Q&A readiness."
+    },
+    "gates": [
+      "age_team_eligibility",
+      "revenue_rule",
+      "student_ownership",
+      "originality",
+      "submission_requirements"
+    ],
+    "rules": "Business Innovation and Social Innovation need different evidence emphasis; current rules and revenue cap must be checked."
+  },
+  "Blue Ocean Competition": {
+    "family": "entrepreneurship",
+    "official": true,
+    "source": "Official scoring criteria: Value Innovation 20%, Impact 20%, Technical Feasibility 20%, Commercial Viability & Scalability 20%, Presentation/Blue Ocean Tools 20%.",
+    "criteria": {
+      "value_innovation": 20,
+      "impact_potential": 20,
+      "technical_feasibility": 20,
+      "commercial_viability_and_scalability": 20,
+      "presentation_and_blue_ocean_tools": 20
+    },
+    "stages": [
+      [
+        "idea",
+        "01 · Blue Ocean Venture Idea"
+      ],
+      [
+        "strategy",
+        "02 · Blue Ocean Strategy Evidence"
+      ],
+      [
+        "submission",
+        "03 · Pitch Submission"
+      ]
+    ],
+    "stage_help": {
+      "idea": "Problem/market, concept, differentiation, low-cost/value logic, target noncustomers and technical feasibility.",
+      "strategy": "Strategy Canvas, Three Tiers of Noncustomers, ERRC Grid, market potential, business model, feasibility and scale evidence.",
+      "submission": "Pitch transcript/storyboard plus required Blue Ocean tools. The engine checks clarity, evidence and alignment with the published five-part rubric."
+    },
+    "gates": [
+      "high_school_eligibility",
+      "student_ownership",
+      "blue_ocean_tools_present",
+      "technical_feasibility",
+      "submission_rules"
+    ],
+    "rules": "Use of specified Blue Ocean tools is mandatory in the published competition instructions."
+  },
+  "Technovation Girls": {
+    "family": "tech_social_venture",
+    "official": true,
+    "source": "2026–27 division-specific official rubrics; 1–5 scoring per item, with different Beginner/Junior/Senior requirements.",
+    "criteria": {
+      "problem_and_ethics": 15,
+      "problem_research_and_sources": 10,
+      "technology_and_working_solution": 20,
+      "user_testing_and_iteration": 20,
+      "adoption_and_business_plan": 10,
+      "learning_and_ai_transparency": 10,
+      "pitch_and_technical_communication": 15
+    },
+    "stages": [
+      [
+        "idea",
+        "01 · Community Problem & Tech Solution"
+      ],
+      [
+        "build",
+        "02 · Build, User Testing & Iteration"
+      ],
+      [
+        "submission",
+        "03 · Division Submission Pack"
+      ]
+    ],
+    "stage_help": {
+      "idea": "Community problem, affected users, evidence/sources, ethical issues, proposed digital solution, alternatives and technology choice.",
+      "build": "Working features, user tests, metrics, debugging, iterations, user feedback, adoption plan, business/financial logic and AI/tool transparency.",
+      "submission": "Paste the correct division's project description, pitch/technical video scripts, adoption plan and learning journey. Grade/age determines rubric."
+    },
+    "gates": [
+      "division_eligibility",
+      "team_and_student_ownership",
+      "working_solution",
+      "ethics_and_safety",
+      "ai_and_source_transparency"
+    ],
+    "rules": "Division-specific rubric is mandatory; do not apply one generic weight table across ages."
+  },
+  "Diana Award": {
+    "family": "social_impact_award",
+    "official": false,
+    "source": "Diana Award five criteria: Vision, Social Impact, Inspiring Others, Youth Leadership, Service Journey; retrospective professional nomination.",
+    "criteria": {
+      "vision": 20,
+      "social_impact": 25,
+      "inspiring_others": 15,
+      "youth_leadership": 20,
+      "service_journey_and_sustained_commitment": 20
+    },
+    "stages": [
+      [
+        "impact",
+        "01 · Impact Journey"
+      ],
+      [
+        "evidence",
+        "02 · Evidence & Third-Party Validation"
+      ],
+      [
+        "submission",
+        "03 · Nomination Readiness"
+      ]
+    ],
+    "stage_help": {
+      "impact": "Describe the cause, why the young person acted, duration, role, beneficiaries, leadership and how the initiative evolved.",
+      "evidence": "Measured outcomes, beneficiary evidence, partnerships, independent validation, testimonials, reach, sustained service and evidence of inspiring others.",
+      "submission": "Paste the nomination evidence/answers and nominator context. The engine checks the five published dimensions and whether claims are evidenced and sustained."
+    },
+    "gates": [
+      "age_eligibility",
+      "professional_nominator",
+      "sustained_social_action",
+      "student_leadership",
+      "evidence_integrity"
+    ],
+    "rules": "Retrospective award: do not treat it as a project competition or suggest starting a short-term project merely to win an award."
+  },
+  "GSL Global Goals Competition": {
+    "family": "social_impact_competition",
+    "official": false,
+    "source": "Official 2026–27 competition page and final submission criteria; final report max 1,000 words + digital submission, detailed judge weights not fully public.",
+    "criteria": {
+      "learning_and_knowledge": 20,
+      "community_impact_and_measurement": 30,
+      "sdg_alignment": 10,
+      "partnerships_and_collaboration": 15,
+      "sustainability_and_legacy": 15,
+      "communication_and_evidence": 10
+    },
+    "stages": [
+      [
+        "idea",
+        "01 · SDG Social Action Idea"
+      ],
+      [
+        "impact",
+        "02 · Delivery, Impact & Partnerships"
+      ],
+      [
+        "submission",
+        "03 · 1,000-word Report & Digital Submission"
+      ]
+    ],
+    "stage_help": {
+      "idea": "SDG, community need, baseline understanding, team plan, intended beneficiaries, partners and realistic six-month action.",
+      "impact": "Activities delivered, baseline vs outcome measures, beneficiaries, hours, learning, partnerships, sustainability, challenges and adaptations.",
+      "submission": "Paste the final report (up to 1,000 words) and digital-submission script/summary. The engine maps evidence to official judging themes."
+    },
+    "gates": [
+      "member_school_route",
+      "age_team_eligibility",
+      "student_led_action",
+      "impact_evidence",
+      "submission_requirements"
+    ],
+    "rules": "Current participation requires GSL Member School route; 2026–27 dates and handbook govern."
+  },
+  "Global Student Prize": {
+    "family": "student_award",
+    "official": false,
+    "source": "Published judging dimensions include academic achievement, peer impact, wider impact, overcoming odds, creativity/innovation and global citizenship; official percentage weights not public.",
+    "criteria": {
+      "academic_achievement": 15,
+      "impact_on_peers": 15,
+      "community_and_broader_impact": 25,
+      "creativity_and_innovation": 15,
+      "global_citizenship": 15,
+      "resilience_and_context": 10,
+      "evidence_and_authenticity": 5
+    },
+    "stages": [
+      [
+        "profile",
+        "01 · Student Profile & Distinction"
+      ],
+      [
+        "evidence",
+        "02 · Impact Evidence & Validation"
+      ],
+      [
+        "submission",
+        "03 · Application / Nomination Readiness"
+      ]
+    ],
+    "stage_help": {
+      "profile": "Academics, major initiatives, peer/community impact, innovation, leadership, global citizenship and context.",
+      "evidence": "Measured outcomes, third-party validation, beneficiary evidence, scale/depth, sustained contribution, awards/media only where relevant and authentic role.",
+      "submission": "Paste application/nomination answers or structured evidence. The engine tests the profile against the published dimensions without inventing official weights."
+    },
+    "gates": [
+      "annual_eligibility",
+      "student_authenticity",
+      "impact_evidence",
+      "application_completeness"
+    ],
+    "rules": "This validates an overall student profile, not one project. Annual eligibility/window must be confirmed."
+  }
+}
