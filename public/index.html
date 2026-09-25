@@ -278,6 +278,102 @@
             }
             }
       }
+
+      .assessment-status {
+  margin-top: 18px;
+  border: 1px solid #d7e3f4;
+  border-radius: 12px;
+  background: #f7faff;
+  padding: 15px 16px;
+}
+
+.assessment-status.hidden {
+  display: none;
+}
+
+.assessment-status-top {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.assessment-spinner {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  border: 3px solid #cbdcf6;
+  border-top-color: #1b4eac;
+  border-radius: 50%;
+  animation: assessment-spin 0.8s linear infinite;
+}
+
+.assessment-status-message {
+  color: #19365e;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.assessment-status-detail {
+  margin: 8px 0 0 29px;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.assessment-progress {
+  width: 100%;
+  height: 5px;
+  margin-top: 13px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #dfe9f7;
+}
+
+.assessment-progress::after {
+  display: block;
+  width: 38%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    #2764c9,
+    #6da1f1
+  );
+  content: "";
+  animation: assessment-progress 1.5s ease-in-out infinite;
+}
+
+.assessment-status.slow .assessment-status-message {
+  color: #8a5a00;
+}
+
+.assessment-status.slow {
+  border-color: #f0d89a;
+  background: #fffaf0;
+}
+
+@keyframes assessment-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes assessment-progress {
+  0% {
+    transform: translateX(-120%);
+  }
+
+  100% {
+    transform: translateX(290%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .assessment-spinner,
+  .assessment-progress::after {
+    animation: none;
+  }
+}
     </style>
   </head>
   <body>
@@ -443,7 +539,47 @@
             Save draft locally
           </button>
         </div>
-        <div id="status" class="status" role="status"></div>
+        <!-- <div id="status" class="status" role="status"></div> -->
+         <div
+  id="status"
+  class="status"
+  role="status"
+  aria-live="polite"
+></div>
+
+<div
+  id="assessmentStatus"
+  class="assessment-status hidden"
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
+>
+  <div class="assessment-status-top">
+    <span
+      class="assessment-spinner"
+      aria-hidden="true"
+    ></span>
+
+    <span
+      id="assessmentStatusMessage"
+      class="assessment-status-message"
+    >
+      Preparing your assessment...
+    </span>
+  </div>
+
+  <p
+    id="assessmentStatusDetail"
+    class="assessment-status-detail"
+  >
+    We are checking the selected competition and the information you provided.
+  </p>
+
+  <div
+    class="assessment-progress"
+    aria-hidden="true"
+  ></div>
+</div>
         <div id="report" class="panel hidden" aria-live="polite"></div>
       </section>
       <section class="panel">
@@ -529,6 +665,175 @@
         $("wordcount").textContent =
           ($("entry").value.trim().match(/\S+/g) || []).length + " words";
       }
+
+      let assessmentTimer = null;
+let assessmentMessageTimer = null;
+let assessmentStartedAt = 0;
+
+const ASSESSMENT_STEPS = [
+  {
+    message: "Reading your project details...",
+    detail:
+      "We are organizing your submission and supporting evidence."
+  },
+  {
+    message: "Checking competition-specific criteria...",
+    detail:
+      "The assessment is being aligned with the opportunity and selected stage."
+  },
+  {
+    message: "Reviewing strengths and evidence...",
+    detail:
+      "The system is identifying the strongest parts of your current work."
+  },
+  {
+    message: "Preparing your report...",
+    detail:
+      "Your result is being checked before it is displayed."
+  }
+];
+
+
+function setAssessmentLoading(isLoading) {
+  const evaluateButton =
+    $("evaluate");
+
+  const statusPanel =
+    $("assessmentStatus");
+
+  const statusMessage =
+    $("assessmentStatusMessage");
+
+  const statusDetail =
+    $("assessmentStatusDetail");
+
+  if (!statusPanel) {
+    return;
+  }
+
+  if (isLoading) {
+    assessmentStartedAt =
+      Date.now();
+
+    statusPanel.classList.remove(
+      "hidden",
+      "slow"
+    );
+
+    statusMessage.textContent =
+      ASSESSMENT_STEPS[0].message;
+
+    statusDetail.textContent =
+      ASSESSMENT_STEPS[0].detail;
+
+    if (evaluateButton) {
+      evaluateButton.disabled = true;
+      evaluateButton.textContent =
+        "Assessing your project...";
+    }
+
+    let stepIndex = 0;
+
+    assessmentMessageTimer =
+      window.setInterval(() => {
+        stepIndex =
+          (stepIndex + 1) %
+          ASSESSMENT_STEPS.length;
+
+        const step =
+          ASSESSMENT_STEPS[stepIndex];
+
+        statusMessage.textContent =
+          step.message;
+
+        statusDetail.textContent =
+          step.detail;
+      }, 4500);
+
+    assessmentTimer =
+      window.setInterval(() => {
+        const elapsedSeconds =
+          Math.floor(
+            (Date.now() -
+              assessmentStartedAt) /
+              1000
+          );
+
+        if (elapsedSeconds >= 15) {
+          statusPanel.classList.add(
+            "slow"
+          );
+
+          statusDetail.textContent =
+            `This is taking longer than usual (${elapsedSeconds}s). `
+            + "The assessment is still running; please keep this page open.";
+        }
+      }, 1000);
+
+    return;
+  }
+
+  if (assessmentMessageTimer !== null) {
+    window.clearInterval(
+      assessmentMessageTimer
+    );
+
+    assessmentMessageTimer =
+      null;
+  }
+
+  if (assessmentTimer !== null) {
+    window.clearInterval(
+      assessmentTimer
+    );
+
+    assessmentTimer =
+      null;
+  }
+
+  statusPanel.classList.add("hidden");
+  statusPanel.classList.remove("slow");
+
+  if (evaluateButton) {
+    evaluateButton.disabled = false;
+    evaluateButton.textContent =
+      "Evaluate";
+  }
+}
+
+
+function setAssessmentError(error) {
+  const statusPanel =
+    $("assessmentStatus");
+
+  const statusMessage =
+    $("assessmentStatusMessage");
+
+  const statusDetail =
+    $("assessmentStatusDetail");
+
+  if (!statusPanel) {
+    return;
+  }
+
+  statusPanel.classList.remove(
+    "hidden"
+  );
+
+  statusPanel.classList.add("slow");
+
+  const message =
+    error instanceof Error
+      ? error.message
+      : String(error || "Assessment failed.");
+
+  statusMessage.textContent =
+    "The assessment could not be completed.";
+
+  statusDetail.textContent =
+    message;
+}
+
       const QUESTIONS = {
         "IRIS National Fair": "How strong is your IRIS project?",
         "Regeneron ISEF": "How strong is your ISEF project?",
@@ -756,52 +1061,160 @@
         $("status").textContent = "Draft saved locally.";
       };
       comp.onchange = renderStages;
-      $("evaluate").onclick = async () => {
-        if (
-        !$("studentName").value.trim() ||
-        !$("parentName").value.trim() ||
-        !$("parentPhone").value.trim() ||
-        !$("parentEmail").value.trim() ||
-        !comp.value ||
-        !stage ||
-        $("entry").value.trim().length < 80
-        ) {
-        $("status").textContent =
-            "Please complete the student, parent and project fields. The project description must contain at least 80 characters.";
-        return;
-        }
-        const p = {
-            student_name: $("studentName").value.trim(),
-            parent_name: $("parentName").value.trim(),
-            parent_phone: $("parentPhone").value.trim(),
-            parent_email: $("parentEmail").value.trim(),
+    //   $("evaluate").onclick = async () => {
+    //     if (
+    //     !$("studentName").value.trim() ||
+    //     !$("parentName").value.trim() ||
+    //     !$("parentPhone").value.trim() ||
+    //     !$("parentEmail").value.trim() ||
+    //     !comp.value ||
+    //     !stage ||
+    //     $("entry").value.trim().length < 80
+    //     ) {
+    //     $("status").textContent =
+    //         "Please complete the student, parent and project fields. The project description must contain at least 80 characters.";
+    //     return;
+    //     }
+    //     const p = {
+    //         student_name: $("studentName").value.trim(),
+    //         parent_name: $("parentName").value.trim(),
+    //         parent_phone: $("parentPhone").value.trim(),
+    //         parent_email: $("parentEmail").value.trim(),
 
-          competition: comp.value,
-          stage,
-          grade: $("grade").value,
-          country: $("country").value,
-          content: $("entry").value,
-          evidence: $("evidence").value,
-          constraints: $("constraints").value,
-        };
-        $("evaluate").disabled = true;
-        $("status").textContent = "Running competition-specific assessment...";
-        try {
-          const res = await fetch("/api/evaluate", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(p),
-          });
-          const d = await res.json();
-          if (!res.ok) throw Error(d.error || "Assessment failed");
-          renderReport(d);
-          $("status").textContent = "Assessment complete.";
-        } catch (e) {
-          $("status").textContent = e.message;
-        } finally {
-          $("evaluate").disabled = false;
-        }
-      };
+    //       competition: comp.value,
+    //       stage,
+    //       grade: $("grade").value,
+    //       country: $("country").value,
+    //       content: $("entry").value,
+    //       evidence: $("evidence").value,
+    //       constraints: $("constraints").value,
+    //     };
+    //     $("evaluate").disabled = true;
+    //     $("status").textContent = "Running competition-specific assessment...";
+    //     try {
+    //       const res = await fetch("/api/evaluate", {
+    //         method: "POST",
+    //         headers: { "Content-Type": "application/json" },
+    //         body: JSON.stringify(p),
+    //       });
+    //       const d = await res.json();
+    //       if (!res.ok) throw Error(d.error || "Assessment failed");
+    //       renderReport(d);
+    //       $("status").textContent = "Assessment complete.";
+    //     } catch (e) {
+    //       $("status").textContent = e.message;
+    //     } finally {
+    //       $("evaluate").disabled = false;
+    //     }
+    //   };
+
+
+    $("evaluate").onclick = async () => {
+  if (
+    !$("studentName").value.trim() ||
+    !$("parentName").value.trim() ||
+    !$("parentPhone").value.trim() ||
+    !$("parentEmail").value.trim() ||
+    !comp.value ||
+    !stage ||
+    $("entry").value.trim().length < 80
+  ) {
+    $("status").textContent =
+      "Please complete the student, parent and project fields. The project description must contain at least 80 characters.";
+
+    setAssessmentLoading(false);
+    return;
+  }
+
+  const p = {
+    student_name:
+      $("studentName").value.trim(),
+
+    parent_name:
+      $("parentName").value.trim(),
+
+    parent_phone:
+      $("parentPhone").value.trim(),
+
+    parent_email:
+      $("parentEmail").value.trim(),
+
+    competition:
+      comp.value,
+
+    stage,
+
+    grade:
+      $("grade").value,
+
+    country:
+      $("country").value,
+
+    content:
+      $("entry").value,
+
+    evidence:
+      $("evidence").value,
+
+    constraints:
+      $("constraints").value,
+  };
+
+  $("status").textContent = "";
+
+  setAssessmentLoading(true);
+
+  try {
+    const res = await fetch(
+      "/api/evaluate",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(p)
+      }
+    );
+
+    let d;
+
+    try {
+      d = await res.json();
+    } catch (error) {
+      throw new Error(
+        "The server returned an invalid response. Please try again."
+      );
+    }
+
+    if (!res.ok) {
+      throw new Error(
+        d.error || "Assessment failed."
+      );
+    }
+
+    /*
+     * Keep the current student report exactly unchanged.
+     */
+    renderReport(d);
+
+    setAssessmentLoading(false);
+
+    $("status").textContent =
+      "Assessment complete.";
+
+    $("report").scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  } catch (error) {
+    setAssessmentLoading(false);
+    setAssessmentError(error);
+
+    $("status").textContent =
+      "Please review the message above and try again.";
+  }
+};
+      
       (async () => {
         try {
           const r = await fetch("/api/config");

@@ -6,6 +6,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 import json
 import os
+import time
 
 
 from db import (
@@ -207,9 +208,27 @@ class Handler(SimpleHTTPRequestHandler):
                         },
                     )
 
+                # return self._json(
+                #     200,
+                #     evaluate(payload),
+                # )
+
+                started_at = time.perf_counter()
+
+                result = evaluate(payload)
+
+                elapsed_seconds = (
+                    time.perf_counter() - started_at
+                )
+
+                self.log_message(
+                    "Evaluation completed in %.2f seconds",
+                    elapsed_seconds,
+                )
+
                 return self._json(
                     200,
-                    evaluate(payload),
+                    result,
                 )
 
             except ValueError as error:
