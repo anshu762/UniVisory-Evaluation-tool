@@ -480,7 +480,356 @@
     async
     ></script> -->
 
-    <script>
+      <script>
+      const $ = (id) =>
+        document.getElementById(id);
+
+        const CALENDLY_URL =
+        "https://calendly.com/geetika-univisory/univisory-counseling";
+
+        function openMentorCalendly() {
+        const calendlyUrl =
+            new URL(CALENDLY_URL);
+
+        if (
+            calendlyUrl.protocol !== "https:" ||
+            calendlyUrl.hostname !== "calendly.com"
+        ) {
+            console.error(
+            "Invalid Calendly URL:",
+            CALENDLY_URL
+            );
+
+            return;
+        }
+
+        window.location.assign(
+            calendlyUrl.toString()
+        );
+        }
+
+        const connectMentorButton =
+        $("connectMentor");
+
+        if (connectMentorButton) {
+        connectMentorButton.addEventListener(
+            "click",
+            openMentorCalendly
+        );
+        }
+
+      let KB = {},
+        stage = "";
+      const comp = $("competition"),
+        tabs = $("tabs");
+      function key() {
+        return "univisory-edge-" + comp.value + "-" + stage;
+      }
+      function count() {
+        $("wordcount").textContent =
+          ($("entry").value.trim().match(/\S+/g) || []).length + " words";
+      }
+      const QUESTIONS = {
+        "IRIS National Fair": "How strong is your IRIS project?",
+        "Regeneron ISEF": "How strong is your ISEF project?",
+        "RSI at MIT": "How strong is your RSI candidacy?",
+        "Conrad Challenge": "How competitive is your Conrad innovation?",
+        "The Earth Prize": "How strong is your sustainability solution?",
+        "Stockholm Junior Water Prize": "How strong is your water research?",
+        "Diamond Challenge": "How strong is your venture?",
+        "Blue Ocean Competition": "How differentiated is your Blue Ocean idea?",
+        "Technovation Girls": "How strong is your technology solution?",
+        "Diana Award": "How strong is your impact journey?",
+        "GSL Global Goals Competition":
+          "How strong is your Global Goals project?",
+        "Global Student Prize":
+          "How distinctive is your student impact profile?",
+      };
+      function renderStages() {
+        const c = KB[comp.value];
+        tabs.replaceChildren();
+        $("heroQuestion").textContent =
+          QUESTIONS[comp.value] || "How competitive is your work?";
+        if (!c) {
+          $("competitionHelp").textContent =
+            "Choose a competition above. This section will adapt to its actual evidence and submission type.";
+          return;
+        }
+        $("competitionHelp").textContent = c.source + " " + c.rules;
+        c.stages.forEach((s, i) => {
+          const b = document.createElement("button");
+          b.textContent = s[1];
+          b.dataset.stage = s[0];
+          b.className = i === 0 ? "active" : "";
+          b.onclick = () => selectStage(s[0], b);
+          tabs.appendChild(b);
+        });
+        selectStage(c.stages[0][0], tabs.firstChild);
+      }
+      function selectStage(s, b) {
+        if (stage && comp.value) localStorage.setItem(key(), $("entry").value);
+        stage = s;
+        [...tabs.children].forEach((x) =>
+          x.classList.toggle("active", x === b),
+        );
+        const c = KB[comp.value];
+        $("entrylabel").textContent = (c.stages.find((x) => x[0] === s) || [
+          "",
+          "Submission",
+        ])[1];
+        $("entry").placeholder =
+          c.stage_help[s] || "Paste your content here...";
+        $("entry").value = localStorage.getItem(key()) || "";
+        count();
+        $("status").textContent = "";
+      }
+      function add(parent, tag, text) {
+        const e = document.createElement(tag);
+        e.textContent = text;
+        parent.appendChild(e);
+        return e;
+      }
+
+      function meaningfulText(value) {
+        return (
+            typeof value === "string" &&
+            value.trim().length > 0
+        );
+      }
+
+
+      function validCriterion(item) {
+  if (!item || typeof item !== "object") {
+    return false;
+  }
+
+  const title =
+    typeof item.title === "string"
+      ? item.title.trim()
+      : "";
+
+  if (!title) {
+    return false;
+  }
+
+  if (
+    item.score === null ||
+    item.score === undefined ||
+    item.score === ""
+  ) {
+    return false;
+  }
+
+  const score = Number(item.score);
+
+  return (
+    Number.isFinite(score) &&
+    score >= 0 &&
+    score <= 5
+  );
+}
+
+    function renderReport(d) {
+  const r = $("report");
+
+  const short =
+    d &&
+    typeof d.short_report === "object" &&
+    d.short_report !== null
+      ? d.short_report
+      : {};
+
+  r.classList.remove("hidden");
+  r.replaceChildren();
+
+  add(
+    r,
+    "h2",
+    "EDGE Strength Assessment"
+  );
+
+  const competition =
+    meaningfulText(short.competition)
+      ? short.competition.trim()
+      : "";
+
+  const stage =
+    meaningfulText(short.stage)
+      ? short.stage.trim()
+      : "";
+
+  if (competition || stage) {
+    add(
+      r,
+      "p",
+      [competition, stage]
+        .filter(Boolean)
+        .join(" · ")
+    );
+  }
+
+  const strength =
+    meaningfulText(
+      short.edge_strength_assessment
+    )
+      ? short.edge_strength_assessment.trim()
+      : "";
+
+  if (strength) {
+    add(r, "h3", strength);
+  }
+
+  const alignment =
+    meaningfulText(
+      short.competition_aligned_strength
+    )
+      ? short.competition_aligned_strength.trim()
+      : "";
+
+  if (alignment) {
+    add(r, "p", alignment);
+  }
+
+  const criteria =
+    Array.isArray(
+      short.strength_by_criterion
+    )
+      ? short.strength_by_criterion
+          .filter(validCriterion)
+          .map((item) => ({
+            title: item.title.trim(),
+            score: Number(item.score)
+          }))
+      : [];
+
+  if (criteria.length > 0) {
+    add(
+      r,
+      "h3",
+      "Strength by criterion"
+    );
+
+    criteria.forEach((item) => {
+      add(
+        r,
+        "p",
+        `${item.title} — ${item.score}/5`
+      );
+    });
+  }
+
+  const message =
+    meaningfulText(short.message)
+      ? short.message.trim()
+      : "";
+
+  if (message) {
+    const notice = add(
+      r,
+      "div",
+      message
+    );
+
+    notice.className = "notice";
+  }
+
+  const mentorButton =
+    document.createElement("button");
+
+  mentorButton.type = "button";
+  mentorButton.className =
+    "short-report-mentor-button";
+  mentorButton.textContent =
+    "Connect with a mentor";
+  mentorButton.style.marginTop = "16px";
+
+  mentorButton.addEventListener(
+    "click",
+    openMentorCalendly
+  );
+
+  r.appendChild(mentorButton);
+}
+      $("entry").oninput = count;
+      $("save").onclick = () => {
+        localStorage.setItem(key(), $("entry").value);
+        $("status").textContent = "Draft saved locally.";
+      };
+      comp.onchange = renderStages;
+      $("evaluate").onclick = async () => {
+        if (
+        !$("studentName").value.trim() ||
+        !$("parentName").value.trim() ||
+        !$("parentPhone").value.trim() ||
+        !$("parentEmail").value.trim() ||
+        !comp.value ||
+        !stage ||
+        $("entry").value.trim().length < 80
+        ) {
+        $("status").textContent =
+            "Please complete the student, parent and project fields. The project description must contain at least 80 characters.";
+        return;
+        }
+        const p = {
+            student_name: $("studentName").value.trim(),
+            parent_name: $("parentName").value.trim(),
+            parent_phone: $("parentPhone").value.trim(),
+            parent_email: $("parentEmail").value.trim(),
+
+          competition: comp.value,
+          stage,
+          grade: $("grade").value,
+          country: $("country").value,
+          content: $("entry").value,
+          evidence: $("evidence").value,
+          constraints: $("constraints").value,
+        };
+        $("evaluate").disabled = true;
+        $("status").textContent = "Running competition-specific assessment...";
+        try {
+          const res = await fetch("/api/evaluate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(p),
+          });
+          const d = await res.json();
+          if (!res.ok) throw Error(d.error || "Assessment failed");
+          renderReport(d);
+          $("status").textContent = "Assessment complete.";
+        } catch (e) {
+          $("status").textContent = e.message;
+        } finally {
+          $("evaluate").disabled = false;
+        }
+      };
+      (async () => {
+        try {
+          const r = await fetch("/api/config");
+          KB = await r.json();
+          renderStages();
+        } catch (e) {
+          $("status").textContent =
+            "Run the backend server to load competition intelligence.";
+        }
+      })();
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!-- <script>
       const $ = (id) =>
         document.getElementById(id);
 
@@ -755,23 +1104,7 @@
             "Run the backend server to load competition intelligence.";
         }
       })();
-    </script>
-  </body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    </script> -->
 
 
 
