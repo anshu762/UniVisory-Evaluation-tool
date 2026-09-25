@@ -7,6 +7,7 @@ from urllib.parse import urlparse
 import json
 import os
 
+
 from db import (
     get_evaluation,
     init_db,
@@ -16,7 +17,7 @@ from db import (
 from engine import KB, evaluate
 
 
-ROOT = Path(__file__).parent
+ROOT = Path(__file__).resolve().parent
 PUBLIC = ROOT / "public"
 
 
@@ -74,15 +75,39 @@ class Handler(SimpleHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = parsed.path
 
+        if path == "/health":
+            return self._json(
+                200,
+                {
+                    "ok": True,
+                    "service": "urie's-edge",
+                },
+            )
+
         if path == "/api/config":
             return self._json(200, KB)
 
         if path == "/api/mentor/reports":
-            return self._json(200, list_evaluations())
+            return self._json(
+                200,
+                list_evaluations(),
+            )
 
         if path.startswith("/api/mentor/reports/"):
-            evaluation_id = path.rsplit("/", 1)[-1]
-            report = get_evaluation(evaluation_id)
+            evaluation_id = path.rsplit(
+                "/",
+                1,
+            )[-1]
+
+            if not evaluation_id:
+                return self._json(
+                    404,
+                    {"error": "Report not found"},
+                )
+
+            report = get_evaluation(
+                evaluation_id
+            )
 
             if not report:
                 return self._json(
@@ -104,36 +129,82 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_POST(self):
         parsed = urlparse(self.path)
+        path = parsed.path
 
-        if parsed.path == "/api/evaluate":
+        if path == "/api/evaluate":
             try:
-                length = int(
-                    self.headers.get(
-                        "Content-Length",
-                        "0",
-                    )
+                content_length = self.headers.get(
+                    "Content-Length"
                 )
+
+                if not content_length:
+                    return self._json(
+                        400,
+                        {
+                            "error": (
+                                "Request body is required"
+                            )
+                        },
+                    )
+
+                try:
+                    length = int(
+                        content_length
+                    )
+                except ValueError:
+                    return self._json(
+                        400,
+                        {
+                            "error": (
+                                "Invalid Content-Length"
+                            )
+                        },
+                    )
 
                 if length <= 0:
                     return self._json(
                         400,
-                        {"error": "Request body is required"},
+                        {
+                            "error": (
+                                "Request body is required"
+                            )
+                        },
                     )
 
                 if length > 700000:
                     return self._json(
                         413,
-                        {"error": "Request too large"},
+                        {
+                            "error": (
+                                "Request too large"
+                            )
+                        },
                     )
 
                 raw_body = self.rfile.read(length)
 
                 try:
-                    payload = json.loads(raw_body)
+                    payload = json.loads(
+                        raw_body
+                    )
                 except json.JSONDecodeError:
                     return self._json(
                         400,
-                        {"error": "Request body must be valid JSON"},
+                        {
+                            "error": (
+                                "Request body must be valid JSON"
+                            )
+                        },
+                    )
+
+                if not isinstance(payload, dict):
+                    return self._json(
+                        400,
+                        {
+                            "error": (
+                                "Request body must be a JSON object"
+                            )
+                        },
                     )
 
                 return self._json(
@@ -161,16 +232,30 @@ class Handler(SimpleHTTPRequestHandler):
 
                 return self._json(
                     500,
-                    {"error": "Internal server error"},
+                    {
+                        "error": (
+                            "Internal server error"
+                        )
+                    },
                 )
 
         if (
-            parsed.path.startswith("/api/mentor/reports/")
-            and parsed.path.endswith("/release")
+            path.startswith(
+                "/api/mentor/reports/"
+            )
+            and path.endswith("/release")
         ):
-            evaluation_id = parsed.path.split("/")[-2]
+            evaluation_id = path.split("/")[-2]
 
-            if not release_evaluation(evaluation_id):
+            if not evaluation_id:
+                return self._json(
+                    404,
+                    {"error": "Report not found"},
+                )
+
+            if not release_evaluation(
+                evaluation_id
+            ):
                 return self._json(
                     404,
                     {"error": "Report not found"},
@@ -198,14 +283,21 @@ if __name__ == "__main__":
     )
 
     print(
-        f"URIE v2 http://127.0.0.1:{port}"
+        f"URIE v2 listening on 0.0.0.0:{port}",
+        flush=True,
     )
 
-    ThreadingHTTPServer(
+    server = ThreadingHTTPServer(
         ("0.0.0.0", port),
         Handler,
-    ).serve_forever()
+    )
 
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        server.server_close()
 
 
 
